@@ -6,9 +6,9 @@ import java.util.Date;
 import org.junit.Test;
 
 import co.com.ceiba.dominio.ServicioParqueo;
-import co.com.ceiba.dominio.TipoVehiculo;
 import co.com.ceiba.dominio.Vehiculo;
 import co.com.ceiba.testdatabuilder.ServicioParqueoTestDataBuilder;
+import co.com.ceiba.testdatabuilder.VehiculoTestDataBuilder;
 
 public class VehiculoTest {
 	
@@ -17,7 +17,8 @@ public class VehiculoTest {
 	
 	@Test
 	public void crearVehiculoTest () {
-		Vehiculo vehiculo = new Vehiculo(new TipoVehiculo("Carro", ""), "USN78E");
+		VehiculoTestDataBuilder vehiculoTestDataBuilder = new VehiculoTestDataBuilder();
+		Vehiculo vehiculo = vehiculoTestDataBuilder.build();
 		ServicioParqueoTestDataBuilder servicioParqueoTestDataBuilder = new ServicioParqueoTestDataBuilder()
 				.conFechaIngreso(FECHA_INGRESO)
 				.conFechaSalida(FECHA_SALIDA)

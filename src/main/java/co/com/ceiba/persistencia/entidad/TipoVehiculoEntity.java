@@ -12,12 +12,16 @@ public class TipoVehiculoEntity {
 	@Id
 	@Column(nullable = false)
 	private Long identificador;
-
+	
 	@Column(nullable = false)
 	private String nombre;
 	
 	@Column(nullable = false)
 	private String descripcion;
+
+	public TipoVehiculoEntity() {
+		super();
+	}
 
 	public TipoVehiculoEntity (String nombre, String descripcion) {
 		super();

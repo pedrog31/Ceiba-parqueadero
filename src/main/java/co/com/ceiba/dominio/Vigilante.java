@@ -34,7 +34,7 @@ public class Vigilante {
 				throw new VigilanteExcepcion(VEHICULO_NO_AUTORIZADO);
 			}
 		}
-		ServicioParqueo servicio = new ServicioParqueo(new Date(), vehiculo, this.repositorioTarifas);
+		ServicioParqueo servicio = new ServicioParqueo(new Date(), this.repositorioTarifas, vehiculo);
 		respositorioServicioParqueo.registrarIngreso(servicio);
 	}
  }

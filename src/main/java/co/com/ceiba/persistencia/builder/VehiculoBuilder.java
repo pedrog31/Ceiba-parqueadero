@@ -7,13 +7,17 @@ public class VehiculoBuilder {
 	
 	private VehiculoBuilder() {}
 	
-	public static Vehiculo convertirADominio (VehiculoEntity servicioParqueoEntity) {
-		return null;
-		
+	public static Vehiculo convertirADominio (VehiculoEntity vehiculoEntity) {
+		return new Vehiculo(
+				vehiculoEntity.getPlaca(),
+				TipoVehiculoBuilder.convertirADominio(vehiculoEntity.getTipoVehiculo())
+				);		
 	}
 	
-	public static VehiculoEntity convertirAEntity (Vehiculo servicioParqueo) {
-		return null;
-		
+	public static VehiculoEntity convertirAEntity (Vehiculo vehiculo) {
+		return new VehiculoEntity(
+				vehiculo.getPlaca(),
+				TipoVehiculoBuilder.convertirAEntity(vehiculo.getTipoVehiculo())
+				);
 	}
 }

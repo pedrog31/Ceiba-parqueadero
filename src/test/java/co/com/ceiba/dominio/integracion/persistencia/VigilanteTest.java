@@ -39,10 +39,10 @@ public class VigilanteTest {
 	
 	@Test
 	public void ingresarVehiculo () {
-		/*Vehiculo vehiculo = vehiculoTestDataBuilder.build();
-		ServicioParqueo servicio = new ServicioParqueo(new Date(), vehiculo, this.repositorioTarifas);
+		Vehiculo vehiculo = vehiculoTestDataBuilder.build();
+		ServicioParqueo servicio = new ServicioParqueo(new Date(), this.repositorioTarifas, vehiculo);
 		repositorioServicioParqueo.registrarIngreso(servicio);
 		ServicioParqueo servicioParqueoGuardado = repositorioServicioParqueo.buscarVehiculo(vehiculo.getPlaca());
-		assertEquals(servicio.getVehiculo().getPlaca(), servicioParqueoGuardado.getVehiculo().getPlaca());*/
+		assertEquals(servicio.getVehiculo().getPlaca(), servicioParqueoGuardado.getVehiculo().getPlaca());
 	}
 }

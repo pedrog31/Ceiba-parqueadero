@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import co.com.ceiba.dominio.ServicioParqueo;
 import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
+import co.com.ceiba.persistencia.builder.ServicioParqueoBuilder;
 import co.com.ceiba.persistencia.repositorio.jpa.RepositorioServicioParqueoJPA;
 
 @Component()
@@ -17,8 +18,8 @@ public class RepositorioServicioParqueoPersistente implements RepositorioServici
 	RepositorioServicioParqueoJPA repositorioServicioParqueoJPA;
 	
 	@Override
-	public void registrarIngreso(ServicioParqueo servicio) {
-		// repositorioServicioParqueoJPA.save(servicio);
+	public void registrarIngreso(ServicioParqueo servicioParqueo) {
+		repositorioServicioParqueoJPA.save(ServicioParqueoBuilder.convertirAEntity(servicioParqueo));
 	}
 
 	@Override
@@ -29,8 +30,7 @@ public class RepositorioServicioParqueoPersistente implements RepositorioServici
 
 	@Override
 	public ServicioParqueo buscarVehiculo(String placa) {
-		// TODO Auto-generated method stub
-		return null;
+		return ServicioParqueoBuilder.convertirADominio(repositorioServicioParqueoJPA.findByVehiculoPlacaAndFechaSalida(placa, null));
 	}
 
 	@Override

@@ -2,19 +2,19 @@ package co.com.ceiba.dominio;
 
 public class Vehiculo {
 	private String placa;
-	private TipoVehiculo tipo;
+	private TipoVehiculo tipoVehiculo;
 	
-	public Vehiculo(TipoVehiculo tipo, String placa) {
+	public Vehiculo(String placa, TipoVehiculo tipoVehiculo) {
 		super();
-		this.tipo = tipo;
 		this.placa = placa;
-	}
-	
-	public TipoVehiculo getTipo() {
-		return tipo;
+		this.tipoVehiculo = tipoVehiculo;
 	}
 	
 	public String getPlaca() {
 		return placa;
+	}
+	
+	public TipoVehiculo getTipoVehiculo() {
+		return tipoVehiculo;
 	}
 }

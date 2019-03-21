@@ -20,11 +20,11 @@ import co.com.ceiba.dominio.repositorio.RepositorioTarifas;
 public class ServicioParqueoTestDataBuilder {
 	
 	private static final TipoVehiculoTestDataBuilder tipoVehiculoTestDataBuilder = new TipoVehiculoTestDataBuilder();
+	private static final VehiculoTestDataBuilder vehiculoTestDataBuilder = new VehiculoTestDataBuilder();
 	
 	private static final Date FECHA_INGRESO_ESTATICO = new Date(1552998998L);
 	private static final Date FECHA_SALIDA_ESTATICO = new Date(1552999500L);
-	private static final TipoVehiculo TIPO_VEHICULO_ESTATICO = tipoVehiculoTestDataBuilder.buildTipoCarro();
-	private static final Vehiculo VEHICULO_ESTATICO = new Vehiculo(TIPO_VEHICULO_ESTATICO, "USN78E");
+	private static final Vehiculo VEHICULO_ESTATICO = vehiculoTestDataBuilder.build();
 	private static final List<Tarifa> TARIFAS_ESTATICAS = new ArrayList<> (Arrays.asList(
 				new Tarifa((byte) 9, (byte) 0, tipoVehiculoTestDataBuilder.buildTipoCarro(), 1000),
 				new Tarifa((byte) -1, (byte) 9, tipoVehiculoTestDataBuilder.buildTipoCarro(), 8000),
@@ -51,8 +51,8 @@ public class ServicioParqueoTestDataBuilder {
 
 	public ServicioParqueo build () {
 		RepositorioTarifas repositorioTarifas = mock(RepositorioTarifas.class);
-		when (repositorioTarifas.obtenerTarifasPorTipoVehiculo(this.vehiculo.getTipo())).thenReturn(tarifas);
-		ServicioParqueo servicioParqueo = new ServicioParqueo (this.fechaIngreso, this.vehiculo, repositorioTarifas);
+		when (repositorioTarifas.obtenerTarifasPorTipoVehiculo(this.vehiculo.getTipoVehiculo())).thenReturn(tarifas);
+		ServicioParqueo servicioParqueo = new ServicioParqueo (this.fechaIngreso, repositorioTarifas, this.vehiculo);
 		servicioParqueo.setFechaSalida(fechaSalida);
 		return servicioParqueo;
 	}
@@ -71,7 +71,7 @@ public class ServicioParqueoTestDataBuilder {
 		this.vehiculo = vehiculo;
 		this.tarifas.clear();
 		this.tarifas.addAll(TARIFAS_ESTATICAS);
-		this.tarifas.removeIf(p -> !p.getTipoVehiculo().getNombre().equals(vehiculo.getTipo().getNombre()));
+		this.tarifas.removeIf(p -> !p.getTipoVehiculo().getNombre().equals(vehiculo.getTipoVehiculo().getNombre()));
 		return this;
 	}
 }

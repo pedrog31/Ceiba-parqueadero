@@ -1,21 +1,25 @@
 package co.com.ceiba.persistencia.entidad;
 
 import java.util.Date;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "EST_SERVICIO_PARQUEO")
 public class ServicioParqueoEntity {
-	
 	@Id
-	@SequenceGenerator(name="EST_SEQ_SERVICIOS_PARQUEADERO", initialValue=1, allocationSize=100)
+	@SequenceGenerator(name = "EST_SEQ_SERVICIOS_PARQUEADERO", sequenceName = "EST_SEQ_SERVICIOS_PARQUEADERO", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	@Column(name = "IDENTIFICADOR")
 	private Long identificador;
 	
 	@Column(nullable = false)
@@ -25,11 +29,25 @@ public class ServicioParqueoEntity {
 	private Date fechaSalida;
 	
 	@Column(nullable = true)
-	private int valor;
+	private long valor;
 	
-	@ManyToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="IDENTIFICADOR_VEHICULO")
 	private VehiculoEntity vehiculo;
+	
+	public ServicioParqueoEntity() {
+		super();
+	}
+
+	public ServicioParqueoEntity(Date fechaIngreso, Date fechaSalida, long valor,
+			VehiculoEntity vehiculo) {
+		super();
+		this.identificador = null;
+		this.fechaIngreso = fechaIngreso;
+		this.fechaSalida = fechaSalida;
+		this.valor = valor;
+		this.vehiculo = vehiculo;
+	}
 	
 	public Date getFechaIngreso() {
 		return fechaIngreso;
@@ -47,11 +65,11 @@ public class ServicioParqueoEntity {
 		this.fechaSalida = fechaSalida;
 	}
 	
-	public int getValor() {
+	public long getValor() {
 		return valor;
 	}
 	
-	public void setValor(int valor) {
+	public void setValor(long valor) {
 		this.valor = valor;
 	}
 

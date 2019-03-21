@@ -4,7 +4,6 @@ import co.com.ceiba.dominio.TipoVehiculo;
 import co.com.ceiba.dominio.Vehiculo;
 
 public class VehiculoTestDataBuilder {
-	private static final TipoVehiculo TIPO_ESTATICO = new TipoVehiculo("Moto bajo cilindraje", "Cilindraje <= 500 CC");
 	private static final String PLACA_ESTATICA = "PYJ41D";
 	
 	private TipoVehiculo tipo;
@@ -12,12 +11,13 @@ public class VehiculoTestDataBuilder {
 	
 	public VehiculoTestDataBuilder() {
 		super();
-		this.tipo = TIPO_ESTATICO;
+		TipoVehiculoTestDataBuilder tipoVehiculoTestDataBuilder = new TipoVehiculoTestDataBuilder();
+		this.tipo = tipoVehiculoTestDataBuilder.buildTipoMoto();
 		this.placa = PLACA_ESTATICA;
 	}
 	
 	public Vehiculo build () {
-		return new Vehiculo (this.tipo, this.placa);
+		return new Vehiculo (this.placa, this.tipo);
 	}
 	
 	public VehiculoTestDataBuilder conTipo (TipoVehiculo tipo) {
