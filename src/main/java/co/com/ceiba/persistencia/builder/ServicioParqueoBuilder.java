@@ -8,8 +8,8 @@ public class ServicioParqueoBuilder {
 	private ServicioParqueoBuilder() {}
 	
 	public static ServicioParqueo convertirADominio (ServicioParqueoEntity servicioParqueoEntity) {
-		ServicioParqueo servicioParqueo = new ServicioParqueo
-		
+		//ServicioParqueo servicioParqueo = new ServicioParqueo
+		return null;
 	}
 	
 	public static ServicioParqueoEntity convertirAEntity (ServicioParqueo servicioParqueo) {
