@@ -18,7 +18,7 @@ pipeline {
 	            doGenerateSubmoduleConfigurations: false, extensions: [], gitTool:
 	            'Git_Centos', submoduleCfg: [], userRemoteConfigs: [[credentialsId:
 	            'GitHub_pedrog31', url:
-	            'https://github.com/pedrog31/Ceiba-Estacionamiento']]])
+	            'https://github.com/pedrog31/Ceiba-parqueadero']]])
 	            sh 'gradle clean'
 	        }
 	    }        
