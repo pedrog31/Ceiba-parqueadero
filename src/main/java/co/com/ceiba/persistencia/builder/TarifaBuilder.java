@@ -23,13 +23,7 @@ public class TarifaBuilder {
 		if (tarifasEntity == null) return new ArrayList<>();
 		List<Tarifa> tarifas = new ArrayList<>();
 		for (TarifaEntity tarifaEntity: tarifasEntity) {
-			if (tarifaEntity != null) {
-				tarifas.add(new Tarifa (
-						tarifaEntity.getHoraCaduca(),
-						tarifaEntity.getHoraInicio(),
-						tarifaEntity.getTipoVehiculo(),
-						tarifaEntity.getValor()));
-			}
+			tarifas.add(convertirADominio (tarifaEntity));
 		}
 		return tarifas;
 	}

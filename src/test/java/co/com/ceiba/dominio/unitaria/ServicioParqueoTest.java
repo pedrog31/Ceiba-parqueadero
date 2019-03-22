@@ -18,9 +18,9 @@ public class ServicioParqueoTest {
 	private static VehiculoTestDataBuilder vehiculoTestDataBuilder;
 	private Calendar calendarInstance = Calendar.getInstance();
 	private static Date fechaActual;
-	private static String TIPO_CARRO = "Carro";
-	private static String TIPO_MOTO = "Moto";
-	private static String TIPO_MOTOAC = "MotoAC";
+	private static final String TIPO_CARRO = "Carro";
+	private static final String TIPO_MOTO = "Moto";
+	private static final String TIPO_MOTOAC = "MotoAC";
 
 	@BeforeClass
 	public static void iniciarServicioParqueoTest() {
@@ -41,6 +41,7 @@ public class ServicioParqueoTest {
 				vehiculoTestDataBuilder.conTipo(TIPO_CARRO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
+		servicioParqueo.calcularValorServicio();
 		int valorEsperado = 5000;
 		assertEquals(valorEsperado, servicioParqueo.getValor());
 	}
@@ -52,6 +53,7 @@ public class ServicioParqueoTest {
 				vehiculoTestDataBuilder.conTipo(TIPO_CARRO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
+		servicioParqueo.calcularValorServicio();
 		int valorEsperado = 8000;
 		assertEquals(valorEsperado, servicioParqueo.getValor());
 	}
@@ -63,6 +65,7 @@ public class ServicioParqueoTest {
 				vehiculoTestDataBuilder.conTipo(TIPO_CARRO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
+		servicioParqueo.calcularValorServicio();
 		int valorEsperado = 8000;
 		assertEquals(valorEsperado, servicioParqueo.getValor());
 	}
@@ -74,6 +77,7 @@ public class ServicioParqueoTest {
 				vehiculoTestDataBuilder.conTipo(TIPO_CARRO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
+		servicioParqueo.calcularValorServicio();
 		int valorEsperado = 11000;
 		assertEquals(valorEsperado, servicioParqueo.getValor());
 	}
@@ -85,6 +89,7 @@ public class ServicioParqueoTest {
 				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
+		servicioParqueo.calcularValorServicio();
 		int valorEsperado = 2500;
 		assertEquals(valorEsperado, servicioParqueo.getValor());
 	}
@@ -96,6 +101,7 @@ public class ServicioParqueoTest {
 				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
+		servicioParqueo.calcularValorServicio();
 		int valorEsperado = 4000;
 		assertEquals(valorEsperado, servicioParqueo.getValor());
 	}
@@ -107,6 +113,7 @@ public class ServicioParqueoTest {
 				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
+		servicioParqueo.calcularValorServicio();
 		int valorEsperado = 4000;
 		assertEquals(valorEsperado, servicioParqueo.getValor());
 	}
@@ -118,6 +125,7 @@ public class ServicioParqueoTest {
 				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
+		servicioParqueo.calcularValorServicio();
 		int valorEsperado = 5500;
 		assertEquals(valorEsperado, servicioParqueo.getValor());
 	}
@@ -129,6 +137,7 @@ public class ServicioParqueoTest {
 				vehiculoTestDataBuilder.conTipo(TIPO_MOTOAC).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
+		servicioParqueo.calcularValorServicio();
 		int valorEsperado = 4500;
 		assertEquals(valorEsperado, servicioParqueo.getValor());
 	}
@@ -140,6 +149,7 @@ public class ServicioParqueoTest {
 				vehiculoTestDataBuilder.conTipo(TIPO_MOTOAC).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
+		servicioParqueo.calcularValorServicio();
 		int valorEsperado = 6000;
 		assertEquals(valorEsperado, servicioParqueo.getValor());
 	}
@@ -151,6 +161,7 @@ public class ServicioParqueoTest {
 				vehiculoTestDataBuilder.conTipo(TIPO_MOTOAC).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
+		servicioParqueo.calcularValorServicio();
 		int valorEsperado = 6000;
 		assertEquals(valorEsperado, servicioParqueo.getValor());
 	}
@@ -162,6 +173,7 @@ public class ServicioParqueoTest {
 				vehiculoTestDataBuilder.conTipo(TIPO_MOTOAC).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
+		servicioParqueo.calcularValorServicio();
 		int valorEsperado = 7500;
 		assertEquals(valorEsperado, servicioParqueo.getValor());
 	}

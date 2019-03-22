@@ -2,7 +2,6 @@ package co.com.ceiba.dominio.repositorio;
 
 import java.util.Date;
 import java.util.List;
-
 import co.com.ceiba.dominio.ServicioParqueo;
 
 public interface RepositorioServicioParqueo {
@@ -11,23 +10,28 @@ public interface RepositorioServicioParqueo {
 	 * Permite registrar un ingreso de vehiculo
 	 * @param vehiculo
 	 */
-	void registrarIngreso (ServicioParqueo servicio);
+	void registrarIngresoVehiculo (ServicioParqueo servicio);
 	
 	/**
 	 * Permite registrar la salida del vehiculo, fecha de salida y valor del servicio
 	 * @param vehiculo
 	 */
-	void registrarSalida (Date fechaFinalizacion, String placa, int valor);
+	void registrarSalidaVehiculo (ServicioParqueo servicioParqueo);
 	
 	/**
-	 * Permite registrar la salida del vehiculo, fecha de salida y valor del servicio
-	 * @param vehiculo
+	 * Permite buscar un servicio activo con base en la placa del vehiculo
+	 * @param placa vehiculo a buscar
 	 */
-	ServicioParqueo buscarVehiculo (String placa);
+	ServicioParqueo buscarServicioVehiculo (String placa, Date fechaSalida);
 	
 	/**
-	 * Permite registrar la salida del vehiculo, fecha de salida y valor del servicio
-	 * @param vehiculo
+	 * Retorna todos los servicios que se encuentran actualmente activos en el parqueadero
 	 */
 	List<ServicioParqueo> obtenerVehiculosParqueadero ();
+
+	/**
+	 * Obtiene el numero de vehiculos parquedos actualmente segun el tipo de vehiculo
+	 * @param placa vehiculo a buscar
+	 */
+	Integer obtenerNumeroVehiculosParqueados(String tipoVehiculo);
 }

@@ -8,21 +8,25 @@ import co.com.ceiba.persistencia.entidad.RestriccionEntity;
 
 public class RestriccionBuilder {
 
-	private RestriccionBuilder () {
+	private RestriccionBuilder() {
 		throw new IllegalStateException("Utility class");
 	}
-	
-	public static List<Restriccion> convertirADominio(List<RestriccionEntity> restriccionesEntity) {
-		List<Restriccion> restricciones = new ArrayList<>();
-		if (restriccionesEntity == null) return restricciones;
-		for (RestriccionEntity restriccionEntity: restriccionesEntity) {
-			if (restriccionEntity != null) {
-				restricciones.add(new Restriccion (
+
+	public static Restriccion convertirADominio(RestriccionEntity restriccionEntity) {
+		return restriccionEntity == null  ? 
+				null : new Restriccion (
 						restriccionEntity.getCapacidad(),
 						restriccionEntity.getDiaAplicacion(),
 						restriccionEntity.getExpresionRegular(),
-						restriccionEntity.getTipoVehiculo()));
-			}
+						restriccionEntity.getTipoVehiculo());
+	}
+
+	public static List<Restriccion> convertirADominio(List<RestriccionEntity> restriccionesEntity) {
+		List<Restriccion> restricciones = new ArrayList<>();
+		if (restriccionesEntity == null)
+			return restricciones;
+		for (RestriccionEntity restriccionEntity : restriccionesEntity) {
+			restricciones.add(convertirADominio(restriccionEntity));
 		}
 		return restricciones;
 	}

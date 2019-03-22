@@ -4,14 +4,14 @@ import co.com.ceiba.dominio.Vehiculo;
 
 public class VehiculoTestDataBuilder {
 	private static final String PLACA_ESTATICA = "PYJ41D";
-	private static final String TIPO = "Carro";
+	private static final String TIPO_ESTATICO = "Carro";
 	
 	private String tipo;
 	private String placa;
 	
 	public VehiculoTestDataBuilder() {
 		super();
-		this.tipo = TIPO;
+		this.tipo = TIPO_ESTATICO;
 		this.placa = PLACA_ESTATICA;
 	}
 	

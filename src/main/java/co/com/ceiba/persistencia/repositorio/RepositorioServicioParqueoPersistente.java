@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import co.com.ceiba.dominio.ServicioParqueo;
+import co.com.ceiba.dominio.excepcion.ServicioParqueoExcepcion;
 import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
 import co.com.ceiba.persistencia.builder.ServicioParqueoBuilder;
 import co.com.ceiba.persistencia.builder.VehiculoBuilder;
+import co.com.ceiba.persistencia.entidad.ServicioParqueoEntity;
 import co.com.ceiba.persistencia.entidad.VehiculoEntity;
 import co.com.ceiba.persistencia.repositorio.jpa.RepositorioServicioParqueoJPA;
 import co.com.ceiba.persistencia.repositorio.jpa.RepositorioVehiculoJPA;
@@ -25,7 +27,7 @@ public class RepositorioServicioParqueoPersistente implements RepositorioServici
 	RepositorioVehiculoJPA repositorioVehiculoJPA;
 	
 	@Override
-	public void registrarIngreso(ServicioParqueo servicioParqueo) {
+	public void registrarIngresoVehiculo(ServicioParqueo servicioParqueo) {
 		Optional<VehiculoEntity> vehiculo = repositorioVehiculoJPA.findById(servicioParqueo.getVehiculo().getPlaca());
 		if (!vehiculo.isPresent()) {
 			repositorioVehiculoJPA.saveAndFlush(VehiculoBuilder.convertirAEntity(servicioParqueo.getVehiculo()));
@@ -34,20 +36,29 @@ public class RepositorioServicioParqueoPersistente implements RepositorioServici
 	}
 
 	@Override
-	public void registrarSalida(Date fechaFinalizacion, String placa, int valor) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public ServicioParqueo buscarVehiculo(String placa) {
-		return ServicioParqueoBuilder.convertirADominio(repositorioServicioParqueoJPA.findByVehiculoPlacaAndFechaSalida(placa, null));
+	public void registrarSalidaVehiculo(ServicioParqueo servicioParqueo) {
+		int numeroActualizaciones = repositorioServicioParqueoJPA.updateByPlacaAndFechaSalida(
+						servicioParqueo.getValor(),
+						servicioParqueo.getVehiculo().getPlaca(),
+						servicioParqueo.getFechaSalida());
+		if (numeroActualizaciones != 1) {
+			throw new ServicioParqueoExcepcion ("Error registrando salida del vehiculo");
+		}
 	}
 
 	@Override
 	public List<ServicioParqueo> obtenerVehiculosParqueadero() {
-		// TODO Auto-generated method stub
-		return null;
+		return ServicioParqueoBuilder.convertirADominio(repositorioServicioParqueoJPA.findByFechaSalidaNull());
+	}
+
+	@Override
+	public ServicioParqueo buscarServicioVehiculo(String placa, Date fechaSalida) {
+		return ServicioParqueoBuilder.convertirADominio(repositorioServicioParqueoJPA.findByVehiculoPlacaAndFechaSalida(placa, fechaSalida));
+	}
+
+	@Override
+	public Integer obtenerNumeroVehiculosParqueados(String tipoVehiculo) {
+		return repositorioServicioParqueoJPA.countByVehiculoTipoVehiculoAndFechaSalidaNull(tipoVehiculo);
 	}
 
 }

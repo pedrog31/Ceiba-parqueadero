@@ -36,7 +36,6 @@ public class ServicioParqueo {
 
 	public void setFechaSalida(Date fechaSalida) {
 		this.fechaSalida = fechaSalida;
-		this.calcularValor();
 	}
 
 	public Date getFechaIngreso() {
@@ -55,10 +54,10 @@ public class ServicioParqueo {
 		return vehiculo;
 	}
 
-	private void calcularValor() {
+	public void calcularValorServicio() {
 		long diferencia = fechaSalida.getTime() - fechaIngreso.getTime();
 		long horas = (diferencia / 3600000) + (diferencia % 3600000 == 0 ? 0:1);
-		valor = calcularValorTarifa(horas);
+		this.valor = calcularValorTarifa(horas);
 	}
 
 	private long calcularValorTarifa(long horas) {

@@ -11,30 +11,56 @@ import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
 import co.com.ceiba.dominio.repositorio.RepositorioTarifas;
 
 public class Vigilante {
-	
+
 	public static final String VEHICULO_NO_AUTORIZADO = "Vehiculo no habilitado para el ingreso.";
+	public static final String PARQUEADERO_LLENO = "No se encuentran espacios disponibles para parquear.";
 	
 	private RepositorioServicioParqueo respositorioServicioParqueo;
 	private RepositorioRestriccion repositorioRestricciones;
 	private RepositorioTarifas repositorioTarifas;
 
-	public Vigilante(RepositorioServicioParqueo respositorioServicioParqueo,RepositorioRestriccion repositorioRestricciones, RepositorioTarifas repositorioTarifas) {
+	public Vigilante(
+			RepositorioServicioParqueo respositorioServicioParqueo,
+			RepositorioRestriccion repositorioRestricciones, 
+			RepositorioTarifas repositorioTarifas) {
 		this.respositorioServicioParqueo = respositorioServicioParqueo;
 		this.repositorioRestricciones = repositorioRestricciones;
 		this.repositorioTarifas = repositorioTarifas;
 	}
 
 	public void registrarIngresoVehiculo(Vehiculo vehiculo) {
+		this.validarIngresoPorRestricciones (vehiculo);
+		ServicioParqueo servicio = new ServicioParqueo(new Date(), this.repositorioTarifas, vehiculo);
+		respositorioServicioParqueo.registrarIngresoVehiculo(servicio);
+	}
+
+	private void validarIngresoPorRestricciones(Vehiculo vehiculo) {
 		List<Restriccion> restricciones = this.repositorioRestricciones
 				.obtenerRestriccionesActivas(vehiculo.getTipo());
 		for (Restriccion restriccion: restricciones) {
-			Pattern pat = Pattern.compile(restriccion.getExpresionRegular(), Pattern.CASE_INSENSITIVE);
-			Matcher match = pat.matcher(vehiculo.getPlaca());
-			if (match.find()) {
-				throw new VigilanteExcepcion(VEHICULO_NO_AUTORIZADO);
+			if (restriccion.getExpresionRegular() != null) {
+				Pattern pat = Pattern.compile(restriccion.getExpresionRegular(), Pattern.CASE_INSENSITIVE);
+				Matcher match = pat.matcher(vehiculo.getPlaca());
+				if (match.find()) {
+					throw new VigilanteExcepcion(VEHICULO_NO_AUTORIZADO);
+				}
+			} else if (restriccion.getCapacidad() != null) {
+				Integer numeroVehiculos = respositorioServicioParqueo.obtenerNumeroVehiculosParqueados(vehiculo.getTipo());
+				if (restriccion.getCapacidad() >= numeroVehiculos) {
+					throw new VigilanteExcepcion(PARQUEADERO_LLENO);
+				}
 			}
 		}
-		ServicioParqueo servicio = new ServicioParqueo(new Date(), this.repositorioTarifas, vehiculo);
-		respositorioServicioParqueo.registrarIngreso(servicio);
+	}
+
+	public void registrarPagoServicio(String placa) {
+		ServicioParqueo servicioParqueo = respositorioServicioParqueo.buscarServicioVehiculo(placa, null);
+		servicioParqueo.calcularValorServicio();
+		respositorioServicioParqueo.registrarSalidaVehiculo(servicioParqueo);
+	}
+
+	public ServicioParqueo registrarSalidaVehiculo(String placa) {
+		// TODO Auto-generated method stub
+		return null;
 	}
  }
