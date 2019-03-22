@@ -4,10 +4,10 @@ public class Tarifa {
 
 	private byte horaCaduca;
 	private byte horaInicio;
-	private TipoVehiculo tipoVehiculo;
+	private String tipoVehiculo;
 	private int valor;
 	
-	public Tarifa(byte horaCaduca, byte horaInicio, TipoVehiculo tipoVehiculo, int valor) {
+	public Tarifa(byte horaCaduca, byte horaInicio, String tipoVehiculo, int valor) {
 		super();
 		this.horaCaduca = horaCaduca;
 		this.horaInicio = horaInicio;
@@ -23,7 +23,7 @@ public class Tarifa {
 		return horaInicio;
 	}
 
-	public TipoVehiculo getTipoVehiculo() {
+	public String getTipoVehiculo() {
 		return tipoVehiculo;
 	}
 

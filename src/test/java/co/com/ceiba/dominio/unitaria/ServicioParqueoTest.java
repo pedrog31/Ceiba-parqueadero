@@ -10,21 +10,21 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import co.com.ceiba.dominio.ServicioParqueo;
 import co.com.ceiba.testdatabuilder.ServicioParqueoTestDataBuilder;
-import co.com.ceiba.testdatabuilder.TipoVehiculoTestDataBuilder;
 import co.com.ceiba.testdatabuilder.VehiculoTestDataBuilder;
 
 public class ServicioParqueoTest {
 
 	private static ServicioParqueoTestDataBuilder servicioParqueoTestDataBuilder;
-	private static TipoVehiculoTestDataBuilder tipoVehiculoTestDataBuilder;
 	private static VehiculoTestDataBuilder vehiculoTestDataBuilder;
 	private Calendar calendarInstance = Calendar.getInstance();
 	private static Date fechaActual;
+	private static String TIPO_CARRO = "Carro";
+	private static String TIPO_MOTO = "Moto";
+	private static String TIPO_MOTOAC = "MotoAC";
 
 	@BeforeClass
 	public static void iniciarServicioParqueoTest() {
 		servicioParqueoTestDataBuilder = new ServicioParqueoTestDataBuilder();
-		tipoVehiculoTestDataBuilder = new TipoVehiculoTestDataBuilder();
 		vehiculoTestDataBuilder = new VehiculoTestDataBuilder();
 		fechaActual = new Date();
 	}
@@ -38,7 +38,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoCarroMenosNueveHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 5);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(tipoVehiculoTestDataBuilder.buildTipoCarro()).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_CARRO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		int valorEsperado = 5000;
@@ -49,7 +49,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoCarroMasNueveHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 10);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(tipoVehiculoTestDataBuilder.buildTipoCarro()).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_CARRO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		int valorEsperado = 8000;
@@ -60,7 +60,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoCarroMenosVeinticuatroHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 23);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(tipoVehiculoTestDataBuilder.buildTipoCarro()).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_CARRO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		int valorEsperado = 8000;
@@ -71,7 +71,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoCarroMasVeinticuatroHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 27);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(tipoVehiculoTestDataBuilder.buildTipoCarro()).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_CARRO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		int valorEsperado = 11000;
@@ -82,7 +82,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoMenosNueveHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 5);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(tipoVehiculoTestDataBuilder.buildTipoMoto()).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		int valorEsperado = 2500;
@@ -93,7 +93,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoMasNueveHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 10);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(tipoVehiculoTestDataBuilder.buildTipoMoto()).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		int valorEsperado = 4000;
@@ -104,7 +104,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoMenosVeinticuatroHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 23);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(tipoVehiculoTestDataBuilder.buildTipoMoto()).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		int valorEsperado = 4000;
@@ -115,7 +115,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoMasVeinticuatroHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 27);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(tipoVehiculoTestDataBuilder.buildTipoMoto()).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		int valorEsperado = 5500;
@@ -126,7 +126,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoACMenosNueveHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 5);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(tipoVehiculoTestDataBuilder.buildTipoMotoAC()).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTOAC).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		int valorEsperado = 4500;
@@ -137,7 +137,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoACMasNueveHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 10);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(tipoVehiculoTestDataBuilder.buildTipoMotoAC()).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTOAC).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		int valorEsperado = 6000;
@@ -148,7 +148,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoACMenosVeinticuatroHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 23);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(tipoVehiculoTestDataBuilder.buildTipoMotoAC()).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTOAC).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		int valorEsperado = 6000;
@@ -159,7 +159,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoACMasVeinticuatroHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 27);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(tipoVehiculoTestDataBuilder.buildTipoMotoAC()).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTOAC).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		int valorEsperado = 7500;

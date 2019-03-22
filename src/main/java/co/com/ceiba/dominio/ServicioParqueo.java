@@ -62,7 +62,7 @@ public class ServicioParqueo {
 	}
 
 	private long calcularValorTarifa(long horas) {
-		List<Tarifa> tarifas = repositorioTarifas.obtenerTarifasPorTipoVehiculo(vehiculo.getTipoVehiculo());
+		List<Tarifa> tarifas = repositorioTarifas.obtenerTarifasPorTipoVehiculo(vehiculo.getTipo());
 		long valorDia = 0;
 		Tarifa tarifaActual = null;
 		for (int i=0; i < tarifas.size(); i++) {

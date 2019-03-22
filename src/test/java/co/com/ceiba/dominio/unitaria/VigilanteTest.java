@@ -18,7 +18,7 @@ import co.com.ceiba.dominio.Restriccion;
 import co.com.ceiba.dominio.Vehiculo;
 import co.com.ceiba.dominio.Vigilante;
 import co.com.ceiba.dominio.excepcion.VigilanteExcepcion;
-import co.com.ceiba.dominio.repositorio.RepositorioRestricciones;
+import co.com.ceiba.dominio.repositorio.RepositorioRestriccion;
 import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
 import co.com.ceiba.dominio.repositorio.RepositorioTarifas;
 import co.com.ceiba.testdatabuilder.VehiculoTestDataBuilder;
@@ -27,7 +27,7 @@ import co.com.ceiba.testdatabuilder.VehiculoTestDataBuilder;
 public class VigilanteTest {
 	
 	private static VehiculoTestDataBuilder vehiculoTestDataBuilder;
-	private static RepositorioRestricciones repositorioRestricciones;
+	private static RepositorioRestriccion repositorioRestricciones;
 	private static RepositorioServicioParqueo respositorioServicioParqueo;
 	private static RepositorioTarifas repositorioTarifas;
 
@@ -38,8 +38,8 @@ public class VigilanteTest {
 	@BeforeClass
 	public static void iniciarTest() {
 		vehiculoTestDataBuilder = new VehiculoTestDataBuilder();
-		repositorioRestricciones = mock(RepositorioRestricciones.class);
-		when(repositorioRestricciones.obtenerRestriccionesActivas()).thenReturn(RESTRICCIONES_ESTATICAS);
+		repositorioRestricciones = mock(RepositorioRestriccion.class);
+		when(repositorioRestricciones.obtenerRestriccionesActivas(vehiculoTestDataBuilder.buildPlacaIniciaA().getTipo())).thenReturn(RESTRICCIONES_ESTATICAS);
 		respositorioServicioParqueo = mock(RepositorioServicioParqueo.class);
 		repositorioTarifas = mock(RepositorioTarifas.class);
 	}

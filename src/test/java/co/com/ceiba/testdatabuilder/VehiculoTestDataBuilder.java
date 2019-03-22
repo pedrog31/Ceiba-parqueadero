@@ -1,18 +1,17 @@
 package co.com.ceiba.testdatabuilder;
 
-import co.com.ceiba.dominio.TipoVehiculo;
 import co.com.ceiba.dominio.Vehiculo;
 
 public class VehiculoTestDataBuilder {
 	private static final String PLACA_ESTATICA = "PYJ41D";
+	private static final String TIPO = "Carro";
 	
-	private TipoVehiculo tipo;
+	private String tipo;
 	private String placa;
 	
 	public VehiculoTestDataBuilder() {
 		super();
-		TipoVehiculoTestDataBuilder tipoVehiculoTestDataBuilder = new TipoVehiculoTestDataBuilder();
-		this.tipo = tipoVehiculoTestDataBuilder.buildTipoMoto();
+		this.tipo = TIPO;
 		this.placa = PLACA_ESTATICA;
 	}
 	
@@ -20,7 +19,7 @@ public class VehiculoTestDataBuilder {
 		return new Vehiculo (this.placa, this.tipo);
 	}
 	
-	public VehiculoTestDataBuilder conTipo (TipoVehiculo tipo) {
+	public VehiculoTestDataBuilder conTipo (String tipo) {
 		this.tipo = tipo;
 		return this;
 	}

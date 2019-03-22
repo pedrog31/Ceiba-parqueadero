@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import co.com.ceiba.dominio.ServicioParqueo;
@@ -22,7 +23,7 @@ import co.com.ceiba.testdatabuilder.VehiculoTestDataBuilder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = CeibaEstacionamientoApplication.class)
-public class VigilanteTest {
+public class VigilanteTest extends AbstractTransactionalJUnit4SpringContextTests {
 
 	private static VehiculoTestDataBuilder vehiculoTestDataBuilder;
 	

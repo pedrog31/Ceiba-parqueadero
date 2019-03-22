@@ -5,9 +5,9 @@ public class Restriccion {
 	private Integer capacidad;
 	private Integer diaAplicacion;
 	private String expresionRegular;
-	private TipoVehiculo tipoVehiculo;
+	private String tipoVehiculo;
 	
-	public Restriccion(Integer capacidad, Integer diaAplicacion, String expresionRegular, TipoVehiculo tipoVehiculo) {
+	public Restriccion(Integer capacidad, Integer diaAplicacion, String expresionRegular, String tipoVehiculo) {
 		super();
 		this.capacidad = capacidad;
 		this.diaAplicacion = diaAplicacion;
@@ -27,7 +27,7 @@ public class Restriccion {
 		return expresionRegular;
 	}
 
-	public TipoVehiculo getTipoVehiculo() {
+	public String getTipoVehiculo() {
 		return tipoVehiculo;
 	}
 }

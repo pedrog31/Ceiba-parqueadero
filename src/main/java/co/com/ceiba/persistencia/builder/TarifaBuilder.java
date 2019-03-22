@@ -15,7 +15,7 @@ public class TarifaBuilder {
 				null : new Tarifa (
 						tarifaEntity.getHoraCaduca(),
 						tarifaEntity.getHoraInicio(),
-						TipoVehiculoBuilder.convertirADominio(tarifaEntity.getTipoVehiculo()),
+						tarifaEntity.getTipoVehiculo(),
 						tarifaEntity.getValor());
 	}
 	
@@ -27,7 +27,7 @@ public class TarifaBuilder {
 				tarifas.add(new Tarifa (
 						tarifaEntity.getHoraCaduca(),
 						tarifaEntity.getHoraInicio(),
-						TipoVehiculoBuilder.convertirADominio(tarifaEntity.getTipoVehiculo()),
+						tarifaEntity.getTipoVehiculo(),
 						tarifaEntity.getValor()));
 			}
 		}
@@ -39,7 +39,7 @@ public class TarifaBuilder {
 				null : new TarifaEntity (
 						tarifa.getHoraCaduca(),
 						tarifa.getHoraInicio(),
-						TipoVehiculoBuilder.convertirAEntity(tarifa.getTipoVehiculo()),
+						tarifa.getTipoVehiculo(),
 						tarifa.getValor());
 	}
 }

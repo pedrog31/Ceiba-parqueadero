@@ -14,15 +14,14 @@ public class VehiculoEntity {
 	@Column(nullable = false)
 	private String placa;
 	
-	@OneToOne
-	@JoinColumn(name="IDENTIFICADOR_TIPO_VEHICULO")
-	private TipoVehiculoEntity tipoVehiculo;
+	@Column(nullable = false)
+	private String tipoVehiculo;
 	
 	public VehiculoEntity() {
 		super();
 	}
 
-	public VehiculoEntity(String placa, TipoVehiculoEntity tipoVehiculo) {
+	public VehiculoEntity(String placa, String tipoVehiculo) {
 		super();
 		this.placa = placa;
 		this.tipoVehiculo = tipoVehiculo;
@@ -36,11 +35,11 @@ public class VehiculoEntity {
 		this.placa = placa;
 	}
 
-	public TipoVehiculoEntity getTipoVehiculo() {
+	public String getTipoVehiculo() {
 		return tipoVehiculo;
 	}
 
-	public void setTipoVehiculo(TipoVehiculoEntity tipoVehiculo) {
+	public void setTipoVehiculo(String tipoVehiculo) {
 		this.tipoVehiculo = tipoVehiculo;
 	}
 }

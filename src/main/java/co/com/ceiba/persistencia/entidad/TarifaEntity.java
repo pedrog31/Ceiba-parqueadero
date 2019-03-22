@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class TarifaEntity {
 
 	@Id
-	@Column(nullable = true)
+	@Column(nullable = false)
 	private Long identificador;
 	
 	@Column(nullable = false)
@@ -20,15 +20,14 @@ public class TarifaEntity {
 	
 	@Column(nullable = false)
 	private byte horaInicio;
-	
-	@ManyToOne
-	@JoinColumn(name="IDENTIFICADOR_TIPO_VEHICULO")
-	private TipoVehiculoEntity tipoVehiculo;
+
+	@Column(nullable = false)
+	private String tipoVehiculo;
 	
 	@Column(nullable = false)
 	private int valor;
 
-	public TarifaEntity(byte horaCaduca, byte horaInicio, TipoVehiculoEntity tipoVehiculo,
+	public TarifaEntity(byte horaCaduca, byte horaInicio, String tipoVehiculo,
 			int valor) {
 		super();
 		this.horaCaduca = horaCaduca;
@@ -61,11 +60,11 @@ public class TarifaEntity {
 		this.horaInicio = horaInicio;
 	}
 
-	public TipoVehiculoEntity getTipoVehiculo() {
+	public String getTipoVehiculo() {
 		return tipoVehiculo;
 	}
 
-	public void setTipoVehiculo(TipoVehiculoEntity tipoVehiculo) {
+	public void setTipoVehiculo(String tipoVehiculo) {
 		this.tipoVehiculo = tipoVehiculo;
 	}
 

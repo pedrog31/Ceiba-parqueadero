@@ -10,14 +10,14 @@ public class VehiculoBuilder {
 	public static Vehiculo convertirADominio (VehiculoEntity vehiculoEntity) {
 		return new Vehiculo(
 				vehiculoEntity.getPlaca(),
-				TipoVehiculoBuilder.convertirADominio(vehiculoEntity.getTipoVehiculo())
+				vehiculoEntity.getTipoVehiculo()
 				);		
 	}
 	
 	public static VehiculoEntity convertirAEntity (Vehiculo vehiculo) {
 		return new VehiculoEntity(
 				vehiculo.getPlaca(),
-				TipoVehiculoBuilder.convertirAEntity(vehiculo.getTipoVehiculo())
+				vehiculo.getTipo()
 				);
 	}
 }

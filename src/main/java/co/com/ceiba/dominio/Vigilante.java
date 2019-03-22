@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import co.com.ceiba.dominio.excepcion.VigilanteExcepcion;
-import co.com.ceiba.dominio.repositorio.RepositorioRestricciones;
+import co.com.ceiba.dominio.repositorio.RepositorioRestriccion;
 import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
 import co.com.ceiba.dominio.repositorio.RepositorioTarifas;
 
@@ -15,10 +15,10 @@ public class Vigilante {
 	public static final String VEHICULO_NO_AUTORIZADO = "Vehiculo no habilitado para el ingreso.";
 	
 	private RepositorioServicioParqueo respositorioServicioParqueo;
-	private RepositorioRestricciones repositorioRestricciones;
+	private RepositorioRestriccion repositorioRestricciones;
 	private RepositorioTarifas repositorioTarifas;
 
-	public Vigilante(RepositorioServicioParqueo respositorioServicioParqueo,RepositorioRestricciones repositorioRestricciones, RepositorioTarifas repositorioTarifas) {
+	public Vigilante(RepositorioServicioParqueo respositorioServicioParqueo,RepositorioRestriccion repositorioRestricciones, RepositorioTarifas repositorioTarifas) {
 		this.respositorioServicioParqueo = respositorioServicioParqueo;
 		this.repositorioRestricciones = repositorioRestricciones;
 		this.repositorioTarifas = repositorioTarifas;
@@ -26,7 +26,7 @@ public class Vigilante {
 
 	public void registrarIngresoVehiculo(Vehiculo vehiculo) {
 		List<Restriccion> restricciones = this.repositorioRestricciones
-				.obtenerRestriccionesActivas();
+				.obtenerRestriccionesActivas(vehiculo.getTipo());
 		for (Restriccion restriccion: restricciones) {
 			Pattern pat = Pattern.compile(restriccion.getExpresionRegular(), Pattern.CASE_INSENSITIVE);
 			Matcher match = pat.matcher(vehiculo.getPlaca());

@@ -2,7 +2,6 @@ package co.com.ceiba.dominio.repositorio;
 
 import java.util.List;
 import co.com.ceiba.dominio.Tarifa;
-import co.com.ceiba.dominio.TipoVehiculo;
 
 public interface RepositorioTarifas {
 	
@@ -11,5 +10,5 @@ public interface RepositorioTarifas {
 	 * @param tipoVehiculo
 	 * @return Lista de tarifas aplicables al vehiculo.
 	 */
-	List<Tarifa> obtenerTarifasPorTipoVehiculo (TipoVehiculo tipoVehiculo);
+	List<Tarifa> obtenerTarifasPorTipoVehiculo (String tipoVehiculo);
 }
