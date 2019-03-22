@@ -17,7 +17,11 @@ public interface RepositorioServicioParqueoJPA extends JpaRepository<ServicioPar
 
 	@Modifying
 	@Query("update ServicioParqueoEntity serv set serv.valor = ?1 where serv.vehiculo.placa = ?2 and serv.fechaSalida = ?3")
-	int updateByPlacaAndFechaSalida(long valor, String placa, Date fechaSalida);
+	int updateValorByPlacaAndFechaSalida(long valor, String placa, Date fechaSalida);
+
+	@Modifying
+	@Query("update ServicioParqueoEntity serv set serv.fechaSalida = ?1 where serv.vehiculo.placa = ?2 and serv.fechaSalida = null")
+	int updateFechaSalidaByPlaca(Date fechaSalida, String placa);
 	
 	Integer countByVehiculoTipoVehiculoAndFechaSalidaNull(String tipoVehiculo);
 	

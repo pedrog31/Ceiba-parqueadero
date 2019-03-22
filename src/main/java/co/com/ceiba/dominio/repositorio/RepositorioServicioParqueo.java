@@ -13,10 +13,16 @@ public interface RepositorioServicioParqueo {
 	void registrarIngresoVehiculo (ServicioParqueo servicio);
 	
 	/**
-	 * Permite registrar la salida del vehiculo, fecha de salida y valor del servicio
-	 * @param vehiculo
+	 * Permite registrar la salida del vehiculo
+	 * 	 * @param vehiculo
 	 */
-	void registrarSalidaVehiculo (ServicioParqueo servicioParqueo);
+	void registrarSalidaVehiculo(ServicioParqueo servicioParqueo);
+	
+	/**
+	 * Permite registrar el efectivo pago del servicio
+	 * 	 * @param vehiculo
+	 */
+	void registrarPagoServicio (ServicioParqueo servicioParqueo);
 	
 	/**
 	 * Permite buscar un servicio activo con base en la placa del vehiculo

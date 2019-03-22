@@ -2,8 +2,6 @@ package co.com.ceiba.dominio.integracion.persistencia;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Date;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,7 +54,7 @@ public class VigilanteTest extends AbstractTransactionalJUnit4SpringContextTests
 		Vigilante vigilante = new Vigilante(repositorioServicioParqueo, repositorioRestriccion, repositorioTarifas);
 		vigilante.registrarIngresoVehiculo(vehiculo);
 		ServicioParqueo servicioParqueo = vigilante.registrarSalidaVehiculo(vehiculo.getPlaca());
-		vigilante.registrarPagoServicio(vehiculo.getPlaca());
+		vigilante.registrarPagoServicio(vehiculo.getPlaca(), servicioParqueo.getFechaSalida());
 		ServicioParqueo servicioParqueoGuardado = repositorioServicioParqueo.buscarServicioVehiculo(vehiculo.getPlaca(), servicioParqueo.getFechaSalida());
 		assertEquals(vehiculo.getPlaca(), servicioParqueoGuardado.getVehiculo().getPlaca());
 	}

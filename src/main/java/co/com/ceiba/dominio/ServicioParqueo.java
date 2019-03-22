@@ -46,6 +46,10 @@ public class ServicioParqueo {
 		return repositorioTarifas;
 	}
 
+	public void setRepositorioTarifas(RepositorioTarifas repositorioTarifas) {
+		this.repositorioTarifas = repositorioTarifas;
+	}
+
 	public long getValor() {
 		return valor;
 	}

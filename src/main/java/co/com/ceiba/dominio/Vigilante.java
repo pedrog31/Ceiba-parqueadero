@@ -46,21 +46,27 @@ public class Vigilante {
 				}
 			} else if (restriccion.getCapacidad() != null) {
 				Integer numeroVehiculos = respositorioServicioParqueo.obtenerNumeroVehiculosParqueados(vehiculo.getTipo());
-				if (restriccion.getCapacidad() >= numeroVehiculos) {
+				if (restriccion.getCapacidad() <= numeroVehiculos) {
 					throw new VigilanteExcepcion(PARQUEADERO_LLENO);
 				}
 			}
 		}
 	}
 
-	public void registrarPagoServicio(String placa) {
+	public ServicioParqueo registrarSalidaVehiculo(String placa) {
 		ServicioParqueo servicioParqueo = respositorioServicioParqueo.buscarServicioVehiculo(placa, null);
+		servicioParqueo.setRepositorioTarifas(this.repositorioTarifas);
+		servicioParqueo.setFechaSalida(new Date());
 		servicioParqueo.calcularValorServicio();
 		respositorioServicioParqueo.registrarSalidaVehiculo(servicioParqueo);
+		return servicioParqueo;
 	}
 
-	public ServicioParqueo registrarSalidaVehiculo(String placa) {
-		// TODO Auto-generated method stub
-		return null;
+	public void registrarPagoServicio(String placa, Date fechaFinalizacion) {
+		ServicioParqueo servicioParqueo = respositorioServicioParqueo.buscarServicioVehiculo(placa, fechaFinalizacion);
+		servicioParqueo.setRepositorioTarifas(this.repositorioTarifas);
+		servicioParqueo.setFechaSalida(fechaFinalizacion);
+		servicioParqueo.calcularValorServicio();
+		respositorioServicioParqueo.registrarPagoServicio(servicioParqueo);
 	}
  }

@@ -12,7 +12,6 @@ import co.com.ceiba.dominio.excepcion.ServicioParqueoExcepcion;
 import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
 import co.com.ceiba.persistencia.builder.ServicioParqueoBuilder;
 import co.com.ceiba.persistencia.builder.VehiculoBuilder;
-import co.com.ceiba.persistencia.entidad.ServicioParqueoEntity;
 import co.com.ceiba.persistencia.entidad.VehiculoEntity;
 import co.com.ceiba.persistencia.repositorio.jpa.RepositorioServicioParqueoJPA;
 import co.com.ceiba.persistencia.repositorio.jpa.RepositorioVehiculoJPA;
@@ -25,24 +24,32 @@ public class RepositorioServicioParqueoPersistente implements RepositorioServici
 
 	@Autowired
 	RepositorioVehiculoJPA repositorioVehiculoJPA;
-	
+
 	@Override
 	public void registrarIngresoVehiculo(ServicioParqueo servicioParqueo) {
 		Optional<VehiculoEntity> vehiculo = repositorioVehiculoJPA.findById(servicioParqueo.getVehiculo().getPlaca());
 		if (!vehiculo.isPresent()) {
 			repositorioVehiculoJPA.saveAndFlush(VehiculoBuilder.convertirAEntity(servicioParqueo.getVehiculo()));
 		}
-		repositorioServicioParqueoJPA.save(ServicioParqueoBuilder.convertirAEntity(servicioParqueo));
+		repositorioServicioParqueoJPA.saveAndFlush(ServicioParqueoBuilder.convertirAEntity(servicioParqueo));
 	}
 
 	@Override
 	public void registrarSalidaVehiculo(ServicioParqueo servicioParqueo) {
-		int numeroActualizaciones = repositorioServicioParqueoJPA.updateByPlacaAndFechaSalida(
-						servicioParqueo.getValor(),
-						servicioParqueo.getVehiculo().getPlaca(),
-						servicioParqueo.getFechaSalida());
+		int numeroActualizaciones = repositorioServicioParqueoJPA.updateFechaSalidaByPlaca(
+				servicioParqueo.getFechaSalida(), servicioParqueo.getVehiculo().getPlaca());
+		repositorioServicioParqueoJPA.flush();
 		if (numeroActualizaciones != 1) {
-			throw new ServicioParqueoExcepcion ("Error registrando salida del vehiculo");
+			throw new ServicioParqueoExcepcion("Error registrando salida del vehiculo");
+		}
+	}
+
+	@Override
+	public void registrarPagoServicio(ServicioParqueo servicioParqueo) {
+		int numeroActualizaciones = repositorioServicioParqueoJPA.updateValorByPlacaAndFechaSalida(
+				servicioParqueo.getValor(), servicioParqueo.getVehiculo().getPlaca(), servicioParqueo.getFechaSalida());
+		if (numeroActualizaciones != 1) {
+			throw new ServicioParqueoExcepcion("Error registrando pago del servicio");
 		}
 	}
 
@@ -53,12 +60,12 @@ public class RepositorioServicioParqueoPersistente implements RepositorioServici
 
 	@Override
 	public ServicioParqueo buscarServicioVehiculo(String placa, Date fechaSalida) {
-		return ServicioParqueoBuilder.convertirADominio(repositorioServicioParqueoJPA.findByVehiculoPlacaAndFechaSalida(placa, fechaSalida));
+		return ServicioParqueoBuilder
+				.convertirADominio(repositorioServicioParqueoJPA.findByVehiculoPlacaAndFechaSalida(placa, fechaSalida));
 	}
 
 	@Override
 	public Integer obtenerNumeroVehiculosParqueados(String tipoVehiculo) {
 		return repositorioServicioParqueoJPA.countByVehiculoTipoVehiculoAndFechaSalidaNull(tipoVehiculo);
 	}
-
 }

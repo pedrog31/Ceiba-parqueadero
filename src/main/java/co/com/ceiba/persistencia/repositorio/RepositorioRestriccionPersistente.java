@@ -22,7 +22,7 @@ public class RepositorioRestriccionPersistente implements RepositorioRestriccion
 		Integer diaSemana = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 		return RestriccionBuilder.convertirADominio(
 				repositorioRestriccionJPA
-					.findByDiaAplicacionAndTipoVehiculoAndEsActiva(diaSemana, tipoVehiculo, true));
+					.findByDiaAplicacionAndTipoVehiculoStartingWithAndEsActiva(diaSemana, tipoVehiculo, true));
 	}
 
 }

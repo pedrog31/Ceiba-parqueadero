@@ -24,6 +24,10 @@ public class TarifaEntity {
 	
 	@Column(nullable = false)
 	private int valor;
+	
+	public TarifaEntity() {
+		
+	}
 
 	public TarifaEntity(byte horaCaduca, byte horaInicio, String tipoVehiculo,
 			int valor) {
