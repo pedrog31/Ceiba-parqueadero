@@ -30,48 +30,28 @@ public class ServicioParqueoEntity {
 	private Date fechaSalida;
 	
 	@Column(nullable = true)
+	private Boolean pagado;
+	
+	@Column(nullable = true)
 	private long valor;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
     @Cascade({CascadeType.REFRESH})
 	private VehiculoEntity vehiculo;
-	
+
 	public ServicioParqueoEntity() {
 		super();
 	}
 
-	public ServicioParqueoEntity(Date fechaIngreso, Date fechaSalida, long valor,
+	public ServicioParqueoEntity(Date fechaIngreso, Date fechaSalida, Boolean pagado, long valor,
 			VehiculoEntity vehiculo) {
 		super();
 		this.identificador = null;
 		this.fechaIngreso = fechaIngreso;
 		this.fechaSalida = fechaSalida;
+		this.pagado = pagado;
 		this.valor = valor;
 		this.vehiculo = vehiculo;
-	}
-	
-	public Date getFechaIngreso() {
-		return fechaIngreso;
-	}
-	
-	public void setFechaIngreso(Date fechaIngreso) {
-		this.fechaIngreso = fechaIngreso;
-	}
-	
-	public Date getFechaSalida() {
-		return fechaSalida;
-	}
-	
-	public void setFechaSalida(Date fechaSalida) {
-		this.fechaSalida = fechaSalida;
-	}
-	
-	public long getValor() {
-		return valor;
-	}
-	
-	public void setValor(long valor) {
-		this.valor = valor;
 	}
 
 	public Long getIdentificador() {
@@ -80,6 +60,38 @@ public class ServicioParqueoEntity {
 
 	public void setIdentificador(Long identificador) {
 		this.identificador = identificador;
+	}
+
+	public Date getFechaIngreso() {
+		return fechaIngreso;
+	}
+
+	public void setFechaIngreso(Date fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
+	}
+
+	public Date getFechaSalida() {
+		return fechaSalida;
+	}
+
+	public void setFechaSalida(Date fechaSalida) {
+		this.fechaSalida = fechaSalida;
+	}
+
+	public Boolean getPagado() {
+		return pagado;
+	}
+
+	public void setPagado(Boolean pagado) {
+		this.pagado = pagado;
+	}
+
+	public long getValor() {
+		return valor;
+	}
+
+	public void setValor(long valor) {
+		this.valor = valor;
 	}
 
 	public VehiculoEntity getVehiculo() {

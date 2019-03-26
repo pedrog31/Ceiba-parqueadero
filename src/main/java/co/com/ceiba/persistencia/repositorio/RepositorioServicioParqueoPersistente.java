@@ -37,7 +37,7 @@ public class RepositorioServicioParqueoPersistente implements RepositorioServici
 	@Override
 	public void registrarSalidaVehiculo(ServicioParqueo servicioParqueo) {
 		int numeroActualizaciones = repositorioServicioParqueoJPA.updateFechaSalidaByPlaca(
-				servicioParqueo.getFechaSalida(), servicioParqueo.getVehiculo().getPlaca());
+				servicioParqueo.getFechaSalida(), servicioParqueo.getValor(), servicioParqueo.getVehiculo().getPlaca());
 		repositorioServicioParqueoJPA.flush();
 		if (numeroActualizaciones != 1) {
 			throw new ServicioParqueoExcepcion("Error registrando salida del vehiculo");
@@ -45,16 +45,15 @@ public class RepositorioServicioParqueoPersistente implements RepositorioServici
 	}
 
 	@Override
-	public void registrarPagoServicio(ServicioParqueo servicioParqueo) {
-		int numeroActualizaciones = repositorioServicioParqueoJPA.updateValorByPlacaAndFechaSalida(
-				servicioParqueo.getValor(), servicioParqueo.getVehiculo().getPlaca(), servicioParqueo.getFechaSalida());
+	public void registrarPagoServicio(String placa, Date fechaFinalizacion) {
+		int numeroActualizaciones = repositorioServicioParqueoJPA.updateValorByPlacaAndFechaSalida(placa, fechaFinalizacion);
 		if (numeroActualizaciones != 1) {
 			throw new ServicioParqueoExcepcion("Error registrando pago del servicio");
 		}
 	}
 
 	@Override
-	public List<ServicioParqueo> obtenerVehiculosParqueadero() {
+	public List<ServicioParqueo> obtenerVehiculosParqueadero() { 
 		return ServicioParqueoBuilder.convertirADominio(repositorioServicioParqueoJPA.findByFechaSalidaNull());
 	}
 

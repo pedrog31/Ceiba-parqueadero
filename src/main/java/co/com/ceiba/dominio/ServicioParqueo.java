@@ -3,31 +3,27 @@ package co.com.ceiba.dominio;
 import java.util.Date;
 import java.util.List;
 
-import co.com.ceiba.dominio.repositorio.RepositorioTarifas;
-
 public class ServicioParqueo {
 	
 	private Date fechaIngreso;
 	private Date fechaSalida;
-	private RepositorioTarifas repositorioTarifas;
+	private Boolean pagado;
+	private List<Tarifa> tarifas;
 	private long valor;
 	private Vehiculo vehiculo;
-	
-	
 
-	public ServicioParqueo(Date fechaIngreso, RepositorioTarifas repositorioTarifas, Vehiculo vehiculo) {
+	public ServicioParqueo(Date fechaIngreso, Vehiculo vehiculo) {
 		super();
 		this.fechaIngreso = fechaIngreso;
-		this.repositorioTarifas = repositorioTarifas;
 		this.vehiculo = vehiculo;
+		this.pagado = false;
 	}
 
-	public ServicioParqueo(Date fechaIngreso, Date fechaSalida, RepositorioTarifas repositorioTarifas, long valor,
-			Vehiculo vehiculo) {
+	public ServicioParqueo(Date fechaIngreso, Date fechaSalida, Boolean pagado, long valor, Vehiculo vehiculo) {
 		super();
 		this.fechaIngreso = fechaIngreso;
 		this.fechaSalida = fechaSalida;
-		this.repositorioTarifas = repositorioTarifas;
+		this.pagado = pagado;
 		this.valor = valor;
 		this.vehiculo = vehiculo;
 	}
@@ -40,16 +36,24 @@ public class ServicioParqueo {
 		this.fechaSalida = fechaSalida;
 	}
 
+	public Boolean isPagado() {
+		return pagado;
+	}
+
+	public void setPagado(Boolean pagado) {
+		this.pagado = pagado;
+	}
+
 	public Date getFechaIngreso() {
 		return fechaIngreso;
 	}
 
-	public RepositorioTarifas getRepositorioTarifas() {
-		return repositorioTarifas;
+	public List<Tarifa> getTarifas() {
+		return tarifas;
 	}
 
-	public void setRepositorioTarifas(RepositorioTarifas repositorioTarifas) {
-		this.repositorioTarifas = repositorioTarifas;
+	public void setTarifas(List<Tarifa> tarifas) {
+		this.tarifas = tarifas;
 	}
 
 	public long getValor() {
@@ -62,25 +66,24 @@ public class ServicioParqueo {
 
 	public void calcularValorServicio() {
 		long horas = Tarifa.obtenerNumeroHoras(fechaIngreso, fechaSalida);
-		List<Tarifa> tarifas = repositorioTarifas.obtenerTarifasPorTipoVehiculo(vehiculo.getTipo());
-		this.valor = calcularValorTarifa(horas, tarifas);
+		this.valor = calcularValorTarifa(horas);
 	}
 
-	private long calcularValorTarifa(long horas, List<Tarifa> tarifas) {
+	private long calcularValorTarifa(long horas) {
 		long valorDia = 0;
 		Tarifa tarifaActual = null;
 		for (int i=0; i < tarifas.size(); i++) {
 			tarifaActual = tarifas.get(i);
 			if (tarifaActual.esRecargo()) {
 				tarifas.remove(i);
-				return tarifaActual.getValor() + calcularValorTarifa(horas, tarifas);
+				return tarifaActual.getValor() + calcularValorTarifa(horas);
 			} else if (tarifaActual.aplicaCobroPorHoras(horas)) {
 				tarifas.remove(i);
 				return horas * tarifaActual.getValor();
 			} else if (tarifaActual.aplicaCobroPorDia()) {
 				tarifas.remove(i);
 				horas -= Tarifa.HORAS_DIA;
-				valorDia = tarifaActual.getValor() + calcularValorTarifa(horas, tarifas);
+				valorDia = tarifaActual.getValor() + calcularValorTarifa(horas);
 			}
 		}
 		return valorDia;

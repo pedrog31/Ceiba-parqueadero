@@ -49,4 +49,9 @@ public class VehiculoTestDataBuilder {
 		this.placa = "SaJ891";
 		return this.build();
 	}
+
+	public boolean sonIguales(Vehiculo esperado, Vehiculo actual) {
+		return esperado.getTipo().equals(actual.getTipo()) &&
+				esperado.getPlaca().equals(actual.getPlaca());
+	}
 }

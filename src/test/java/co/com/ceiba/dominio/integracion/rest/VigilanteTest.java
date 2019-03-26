@@ -38,8 +38,12 @@ public class VigilanteTest extends AbstractTransactionalJUnit4SpringContextTests
 
 	@Test
 	public void registrarIngresoVehiculoITest() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.post("/vigilante/registrar-ingreso")
-				.content(vehiculoTestDataBuilder.buildJsonString()).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+		mockMvc.perform(
+				MockMvcRequestBuilders
+					.post("/vigilante/registrar-ingreso")
+					.content(vehiculoTestDataBuilder.buildJsonString())
+					.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isCreated());
 	}
 
 }

@@ -3,30 +3,31 @@ package co.com.ceiba.persistencia.builder;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import co.com.ceiba.dominio.ServicioParqueo;
-import co.com.ceiba.dominio.repositorio.RepositorioTarifas;
 import co.com.ceiba.persistencia.entidad.ServicioParqueoEntity;
 
 public final class ServicioParqueoBuilder {
-
-	@Autowired
-	static RepositorioTarifas repositorioTarifas;
 
 	private ServicioParqueoBuilder() {
 	}
 
 	public static ServicioParqueo convertirADominio(ServicioParqueoEntity servicioParqueoEntity) {
 		return servicioParqueoEntity == null ? null
-				: new ServicioParqueo(servicioParqueoEntity.getFechaIngreso(), servicioParqueoEntity.getFechaSalida(),
-						repositorioTarifas, servicioParqueoEntity.getValor(),
+				: new ServicioParqueo(
+						servicioParqueoEntity.getFechaIngreso(), 
+						servicioParqueoEntity.getFechaSalida(),
+						servicioParqueoEntity.getPagado(),
+						servicioParqueoEntity.getValor(),
 						VehiculoBuilder.convertirADominio(servicioParqueoEntity.getVehiculo()));
 	}
 
 	public static ServicioParqueoEntity convertirAEntity(ServicioParqueo servicioParqueo) {
-		return new ServicioParqueoEntity(servicioParqueo.getFechaIngreso(), servicioParqueo.getFechaSalida(),
-				servicioParqueo.getValor(), VehiculoBuilder.convertirAEntity(servicioParqueo.getVehiculo()));
+		return new ServicioParqueoEntity(
+				servicioParqueo.getFechaIngreso(),
+				servicioParqueo.getFechaSalida(),
+				servicioParqueo.isPagado(),
+				servicioParqueo.getValor(),
+				VehiculoBuilder.convertirAEntity(servicioParqueo.getVehiculo()));
 	}
 
 	public static List<ServicioParqueo> convertirADominio(List<ServicioParqueoEntity> serviciosParqueoEntity) {
@@ -40,3 +41,4 @@ public final class ServicioParqueoBuilder {
 		return serviciosParqueo;
 	}
 }
+ 

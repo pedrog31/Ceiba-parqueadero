@@ -2,6 +2,7 @@ package co.com.ceiba.dominio.integracion.persistencia;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,10 +14,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import co.com.ceiba.dominio.ServicioParqueo;
 import co.com.ceiba.dominio.Vehiculo;
 import co.com.ceiba.dominio.Vigilante;
-import co.com.ceiba.dominio.repositorio.RepositorioRestriccion;
 import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
-import co.com.ceiba.dominio.repositorio.RepositorioTarifas;
 import co.com.ceiba.framework.springboot.CeibaEstacionamientoApplication;
+import co.com.ceiba.testdatabuilder.ServicioParqueoTestDataBuilder;
 import co.com.ceiba.testdatabuilder.VehiculoTestDataBuilder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,38 +24,34 @@ import co.com.ceiba.testdatabuilder.VehiculoTestDataBuilder;
 public class VigilanteTest extends AbstractTransactionalJUnit4SpringContextTests {
 
 	private static VehiculoTestDataBuilder vehiculoTestDataBuilder;
+	private static ServicioParqueoTestDataBuilder servicioParqueoTestDataBuilder;
 	
 	@Autowired
-	RepositorioServicioParqueo repositorioServicioParqueo;
+	private Vigilante vigilante;
 	
 	@Autowired
-	RepositorioRestriccion repositorioRestriccion;
-	
-	@Autowired
-	RepositorioTarifas repositorioTarifas;
+	private RepositorioServicioParqueo repositorioServicioParqueo;
 	
 	@BeforeClass
 	public static void iniciarServicioParqueoTest() {
 		vehiculoTestDataBuilder = new VehiculoTestDataBuilder();
+		servicioParqueoTestDataBuilder = new ServicioParqueoTestDataBuilder();
 	}
 	
 	@Test
 	public void registrarIngresoVehiculoITest () {
 		Vehiculo vehiculo = vehiculoTestDataBuilder.build();
-		Vigilante vigilante = new Vigilante(repositorioServicioParqueo, repositorioRestriccion, repositorioTarifas);
-		vigilante.registrarIngresoVehiculo(vehiculo);
+		ServicioParqueo servicioParqueo = vigilante.registrarIngresoVehiculo(vehiculo);
 		ServicioParqueo servicioParqueoGuardado = repositorioServicioParqueo.buscarServicioVehiculo(vehiculo.getPlaca(), null);
-		assertEquals(vehiculo.getPlaca(), servicioParqueoGuardado.getVehiculo().getPlaca());
+		Assert.assertTrue(servicioParqueoTestDataBuilder.sonIguales(servicioParqueo, servicioParqueoGuardado));
 	}
 	
 	@Test
 	public void registrarSalidaVehiculoITest () {
 		Vehiculo vehiculo = vehiculoTestDataBuilder.build();
-		Vigilante vigilante = new Vigilante(repositorioServicioParqueo, repositorioRestriccion, repositorioTarifas);
 		vigilante.registrarIngresoVehiculo(vehiculo);
 		ServicioParqueo servicioParqueo = vigilante.registrarSalidaVehiculo(vehiculo.getPlaca());
-		vigilante.registrarPagoServicio(vehiculo.getPlaca(), servicioParqueo.getFechaSalida());
 		ServicioParqueo servicioParqueoGuardado = repositorioServicioParqueo.buscarServicioVehiculo(vehiculo.getPlaca(), servicioParqueo.getFechaSalida());
-		assertEquals(vehiculo.getPlaca(), servicioParqueoGuardado.getVehiculo().getPlaca());
+		Assert.assertTrue(servicioParqueoTestDataBuilder.sonIguales(servicioParqueo, servicioParqueoGuardado));
 	}
 }

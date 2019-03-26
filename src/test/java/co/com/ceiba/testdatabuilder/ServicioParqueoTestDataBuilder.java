@@ -1,8 +1,5 @@
 package co.com.ceiba.testdatabuilder;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -13,16 +10,14 @@ import org.springframework.stereotype.Component;
 import co.com.ceiba.dominio.ServicioParqueo;
 import co.com.ceiba.dominio.Tarifa;
 import co.com.ceiba.dominio.Vehiculo;
-import co.com.ceiba.dominio.repositorio.RepositorioTarifas;
 
 @Component
 public class ServicioParqueoTestDataBuilder {
 	
-	private static final VehiculoTestDataBuilder vehiculoTestDataBuilder = new VehiculoTestDataBuilder();
+	private VehiculoTestDataBuilder vehiculoTestDataBuilder;
 	
 	private static final Date FECHA_INGRESO_ESTATICO = new Date(1552998998L);
 	private static final Date FECHA_SALIDA_ESTATICO = new Date(1552999500L);
-	private static final Vehiculo VEHICULO_ESTATICO = vehiculoTestDataBuilder.build();
 	private static final String CARRO_ESTATICO = "Carro";
 	private static final String MOTO_ESTATICA = "Moto";
 	private static final String MOTO_AC_ESTATICA = "MotoAC";
@@ -43,18 +38,18 @@ public class ServicioParqueoTestDataBuilder {
 	
 	public ServicioParqueoTestDataBuilder () {
 		super();
+		vehiculoTestDataBuilder = new VehiculoTestDataBuilder();
 		this.fechaIngreso = FECHA_INGRESO_ESTATICO;
 		this.fechaSalida = FECHA_SALIDA_ESTATICO;
-		this.vehiculo = VEHICULO_ESTATICO;
+		this.vehiculo = vehiculoTestDataBuilder.build(); 
 		this.tarifas = new ArrayList<>();
 		this.tarifas.addAll(TARIFAS_ESTATICAS);
 	}
 
 	public ServicioParqueo build () {
-		RepositorioTarifas repositorioTarifas = mock(RepositorioTarifas.class);
-		when (repositorioTarifas.obtenerTarifasPorTipoVehiculo(this.vehiculo.getTipo())).thenReturn(tarifas);
-		ServicioParqueo servicioParqueo = new ServicioParqueo (this.fechaIngreso, repositorioTarifas, this.vehiculo);
+		ServicioParqueo servicioParqueo = new ServicioParqueo (this.fechaIngreso, this.vehiculo);
 		servicioParqueo.setFechaSalida(fechaSalida);
+		servicioParqueo.setTarifas(tarifas);
 		return servicioParqueo;
 	}
 	
@@ -74,5 +69,17 @@ public class ServicioParqueoTestDataBuilder {
 		this.tarifas.addAll(TARIFAS_ESTATICAS);
 		this.tarifas.removeIf(p -> !p.getTipoVehiculo().equals(vehiculo.getTipo()));
 		return this;
+	}
+	
+	public boolean sonIguales (ServicioParqueo esperado, ServicioParqueo actual) {
+		return safeEquals(esperado.getFechaIngreso(), actual.getFechaIngreso()) &&
+				safeEquals(esperado.getFechaSalida(), actual.getFechaSalida()) &&
+				safeEquals(esperado.isPagado(), actual.isPagado()) &&
+				esperado.getValor() == actual.getValor() &&
+				vehiculoTestDataBuilder.sonIguales(esperado.getVehiculo(), actual.getVehiculo());
+	}
+
+	private boolean safeEquals(Object esperado, Object actual) {
+		return esperado == null ? actual == null : esperado.equals(actual);
 	}
 }

@@ -22,7 +22,7 @@ public interface RepositorioServicioParqueo {
 	 * Permite registrar el efectivo pago del servicio
 	 * 	 * @param vehiculo
 	 */
-	void registrarPagoServicio (ServicioParqueo servicioParqueo);
+	void registrarPagoServicio (String placa, Date fechaFinalizacion);
 	
 	/**
 	 * Permite buscar un servicio activo con base en la placa del vehiculo

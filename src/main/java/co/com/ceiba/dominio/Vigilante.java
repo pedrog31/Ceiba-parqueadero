@@ -30,10 +30,11 @@ public class Vigilante {
 		this.repositorioTarifas = repositorioTarifas;
 	}
 
-	public void registrarIngresoVehiculo(Vehiculo vehiculo) {
+	public ServicioParqueo registrarIngresoVehiculo(Vehiculo vehiculo) {
 		this.validarIngresoPorRestricciones (vehiculo);
-		ServicioParqueo servicio = new ServicioParqueo(new Date(), this.repositorioTarifas, vehiculo);
+		ServicioParqueo servicio = new ServicioParqueo(new Date(), vehiculo);
 		respositorioServicioParqueo.registrarIngresoVehiculo(servicio);
+		return servicio;
 	}
 
 	private void validarIngresoPorRestricciones(Vehiculo vehiculo) {
@@ -57,7 +58,8 @@ public class Vigilante {
 
 	public ServicioParqueo registrarSalidaVehiculo(String placa) {
 		ServicioParqueo servicioParqueo = respositorioServicioParqueo.buscarServicioVehiculo(placa, null);
-		servicioParqueo.setRepositorioTarifas(this.repositorioTarifas);
+		List<Tarifa> tarifas = repositorioTarifas.obtenerTarifasPorTipoVehiculo(servicioParqueo.getVehiculo().getTipo());
+		servicioParqueo.setTarifas(tarifas);
 		servicioParqueo.setFechaSalida(new Date());
 		servicioParqueo.calcularValorServicio();
 		respositorioServicioParqueo.registrarSalidaVehiculo(servicioParqueo);
@@ -65,10 +67,6 @@ public class Vigilante {
 	}
 
 	public void registrarPagoServicio(String placa, Date fechaFinalizacion) {
-		ServicioParqueo servicioParqueo = respositorioServicioParqueo.buscarServicioVehiculo(placa, fechaFinalizacion);
-		servicioParqueo.setRepositorioTarifas(this.repositorioTarifas);
-		servicioParqueo.setFechaSalida(fechaFinalizacion);
-		servicioParqueo.calcularValorServicio();
-		respositorioServicioParqueo.registrarPagoServicio(servicioParqueo);
+		respositorioServicioParqueo.registrarPagoServicio(placa, fechaFinalizacion);
 	}
  }
