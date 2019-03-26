@@ -3,7 +3,7 @@ package co.com.ceiba.persistencia.builder;
 import co.com.ceiba.dominio.Vehiculo;
 import co.com.ceiba.persistencia.entidad.VehiculoEntity;
 
-public class VehiculoBuilder {
+public final class VehiculoBuilder {
 	
 	private VehiculoBuilder() {}
 	
