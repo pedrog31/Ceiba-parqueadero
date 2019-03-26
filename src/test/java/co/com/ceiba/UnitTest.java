@@ -1,4 +1,4 @@
-package co.com.ceiba.dominio;
+package co.com.ceiba;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

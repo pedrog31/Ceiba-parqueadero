@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EntityScan("co.com.ceiba.persistencia.entidad")
-@ComponentScan("co.com.ceiba.persistencia")
+@ComponentScan("co.com.ceiba")
 @EnableJpaRepositories("co.com.ceiba.persistencia.repositorio.jpa") 
 public class CeibaEstacionamientoApplication {
 

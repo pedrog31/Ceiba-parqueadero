@@ -1,5 +1,8 @@
 package co.com.ceiba.testdatabuilder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import co.com.ceiba.dominio.Vehiculo;
 
 public class VehiculoTestDataBuilder {
@@ -10,15 +13,21 @@ public class VehiculoTestDataBuilder {
 	
 	private String tipo;
 	private String placa;
+	private ObjectMapper objectMapper;
 	
 	public VehiculoTestDataBuilder() {
 		super();
 		this.tipo = CARRO_ESTATICO;
 		this.placa = PLACA_ESTATICA;
+		objectMapper = new ObjectMapper(); 
 	}
 	
 	public Vehiculo build () {
 		return new Vehiculo (this.placa, this.tipo);
+	}
+	
+	public String buildJsonString () throws JsonProcessingException {
+		return objectMapper.writeValueAsString(this.build());
 	}
 	
 	public VehiculoTestDataBuilder conTipo (String tipo) {
