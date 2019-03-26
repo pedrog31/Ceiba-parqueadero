@@ -6,7 +6,7 @@ import java.util.List;
 import co.com.ceiba.dominio.Tarifa;
 import co.com.ceiba.persistencia.entidad.TarifaEntity;
 
-public class TarifaBuilder {
+public final class TarifaBuilder {
 	
 	private TarifaBuilder() {}
 	
@@ -20,7 +20,9 @@ public class TarifaBuilder {
 	}
 	
 	public static List<Tarifa> convertirADominio(List<TarifaEntity> tarifasEntity) {
-		if (tarifasEntity == null) return new ArrayList<>();
+		if (tarifasEntity == null) {
+			return new ArrayList<>();
+		}
 		List<Tarifa> tarifas = new ArrayList<>();
 		for (TarifaEntity tarifaEntity: tarifasEntity) {
 			tarifas.add(convertirADominio (tarifaEntity));
