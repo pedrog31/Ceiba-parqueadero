@@ -2,14 +2,20 @@ package co.com.ceiba.dominio.unitaria;
 
 import static org.junit.Assert.assertEquals;
 
+
 import java.util.Date;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import co.com.ceiba.dominio.ServicioParqueo;
+import co.com.ceiba.dominio.UnitTest;
 import co.com.ceiba.dominio.Vehiculo;
 import co.com.ceiba.testdatabuilder.ServicioParqueoTestDataBuilder;
 import co.com.ceiba.testdatabuilder.VehiculoTestDataBuilder;
 
+@RunWith(SpringRunner.class)
+@UnitTest
 public class VehiculoTest {
 	
 	private static final Date FECHA_INGRESO = new Date(1552998096L);

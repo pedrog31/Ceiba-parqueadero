@@ -24,3 +24,15 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
+
+test {
+    useJUnit {
+        systemProperty "testprofile", "unittest"
+    }
+}
+ 
+task integrationTest(type: Test) {
+    useJUnit {
+        systemProperty "testprofile", "integrationtest"
+    }
+}

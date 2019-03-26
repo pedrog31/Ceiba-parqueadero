@@ -15,8 +15,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import co.com.ceiba.dominio.Restriccion;
+import co.com.ceiba.dominio.UnitTest;
 import co.com.ceiba.dominio.Vehiculo;
 import co.com.ceiba.dominio.Vigilante;
 import co.com.ceiba.dominio.excepcion.VigilanteExcepcion;
@@ -25,7 +27,8 @@ import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
 import co.com.ceiba.dominio.repositorio.RepositorioTarifas;
 import co.com.ceiba.testdatabuilder.VehiculoTestDataBuilder;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@UnitTest
 public class VigilanteTest {
 
 	private static VehiculoTestDataBuilder vehiculoTestDataBuilder;
