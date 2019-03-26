@@ -25,13 +25,13 @@ pipeline {
 	    stage('Unit Tests') {
 	        steps{
 	            echo "------------>Unit Tests<------------"
-	            sh './gradlew test'
+	            sh './gradle test'
 	        }
 	    }
 	    stage('Integration Tests') {
 	        steps {
 	            echo "------------>Integration Tests<------------"
-	            sh './gradlew integrationTest'
+	            sh './gradle integrationTest'
 	        }
 	    }
 	    stage('Static Code Analysis') {
