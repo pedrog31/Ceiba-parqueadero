@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import co.com.ceiba.UnitTest;
 import co.com.ceiba.dominio.ServicioParqueo;
 import co.com.ceiba.testdatabuilder.ServicioParqueoTestDataBuilder;
 import co.com.ceiba.testdatabuilder.VehiculoTestDataBuilder;

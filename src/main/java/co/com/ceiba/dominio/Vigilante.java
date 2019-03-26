@@ -18,6 +18,8 @@ public class Vigilante {
 	private RepositorioServicioParqueo respositorioServicioParqueo;
 	private RepositorioRestriccion repositorioRestricciones;
 	private RepositorioTarifas repositorioTarifas;
+	
+	//private List<ValidacionesIngreso> validates:
 
 	public Vigilante(
 			RepositorioServicioParqueo respositorioServicioParqueo,

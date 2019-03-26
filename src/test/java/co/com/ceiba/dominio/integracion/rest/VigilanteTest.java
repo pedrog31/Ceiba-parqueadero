@@ -9,6 +9,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -20,7 +21,7 @@ import co.com.ceiba.testdatabuilder.VehiculoTestDataBuilder;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = CeibaEstacionamientoApplication.class)
-public class VigilanteTest {
+public class VigilanteTest extends AbstractTransactionalJUnit4SpringContextTests {
 	
 	@Autowired
     private WebApplicationContext webAppContext;

@@ -14,10 +14,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import co.com.ceiba.UnitTest;
 import co.com.ceiba.dominio.Restriccion;
 import co.com.ceiba.dominio.Vehiculo;
 import co.com.ceiba.dominio.Vigilante;
