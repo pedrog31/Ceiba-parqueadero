@@ -69,4 +69,8 @@ public class Vigilante {
 	public void registrarPagoServicio(Boolean pagado, String placa) {
 		respositorioServicioParqueo.registrarPagoServicio(pagado, placa);
 	}
+	
+	public List<ServicioParqueo> obtenerVehiculosParqueados () {
+		return respositorioServicioParqueo.obtenerVehiculosParqueadero();
+	}
  }

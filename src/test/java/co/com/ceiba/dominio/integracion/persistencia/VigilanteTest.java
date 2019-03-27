@@ -1,7 +1,5 @@
 package co.com.ceiba.dominio.integracion.persistencia;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

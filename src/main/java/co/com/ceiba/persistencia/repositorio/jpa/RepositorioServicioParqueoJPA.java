@@ -28,7 +28,7 @@ public interface RepositorioServicioParqueoJPA extends JpaRepository<ServicioPar
 
 	@Modifying(clearAutomatically = true)
 	@Transactional
-	@Query("update ServicioParqueoEntity serv set serv.pagado = :pagado where serv.vehiculo.placa = :placa and serv.pagado = null and serv.fechaSalida != null")
+	@Query("update ServicioParqueoEntity serv set serv.pagado = :pagado where serv.vehiculo.placa = :placa and serv.fechaSalida != null")
 	int registrarPagoServicio(@Param("pagado") Boolean pagado, @Param("placa") String placa);
 
 }

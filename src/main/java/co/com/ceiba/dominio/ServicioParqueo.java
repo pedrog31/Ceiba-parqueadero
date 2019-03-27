@@ -12,6 +12,10 @@ public class ServicioParqueo {
 	private long valor;
 	private Vehiculo vehiculo;
 
+	public ServicioParqueo() {
+		super();
+	}
+
 	public ServicioParqueo(Date fechaIngreso, Vehiculo vehiculo) {
 		super();
 		this.fechaIngreso = fechaIngreso;
