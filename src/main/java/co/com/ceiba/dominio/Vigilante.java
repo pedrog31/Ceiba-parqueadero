@@ -55,18 +55,18 @@ public class Vigilante {
 			}
 		}
 	}
-
+ 
 	public ServicioParqueo registrarSalidaVehiculo(String placa) {
 		ServicioParqueo servicioParqueo = respositorioServicioParqueo.buscarServicioVehiculo(placa, null);
 		List<Tarifa> tarifas = repositorioTarifas.obtenerTarifasPorTipoVehiculo(servicioParqueo.getVehiculo().getTipo());
 		servicioParqueo.setTarifas(tarifas);
-		servicioParqueo.setFechaSalida(new Date());
+		servicioParqueo.setFechaSalida(new Date()); 
 		servicioParqueo.calcularValorServicio();
 		respositorioServicioParqueo.registrarSalidaVehiculo(servicioParqueo);
 		return servicioParqueo;
 	}
 
-	public void registrarPagoServicio(String placa, Date fechaFinalizacion) {
-		respositorioServicioParqueo.registrarPagoServicio(placa, fechaFinalizacion);
+	public void registrarPagoServicio(Boolean pagado, String placa) {
+		respositorioServicioParqueo.registrarPagoServicio(pagado, placa);
 	}
  }

@@ -16,7 +16,7 @@ public class ServicioParqueo {
 		super();
 		this.fechaIngreso = fechaIngreso;
 		this.vehiculo = vehiculo;
-		this.pagado = false;
+		this.pagado = null;
 	}
 
 	public ServicioParqueo(Date fechaIngreso, Date fechaSalida, Boolean pagado, long valor, Vehiculo vehiculo) {

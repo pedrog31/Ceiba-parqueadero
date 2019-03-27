@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.com.ceiba.persistencia.entidad.ServicioParqueoEntity;
 
@@ -16,15 +17,18 @@ public interface RepositorioServicioParqueoJPA extends JpaRepository<ServicioPar
 
 	ServicioParqueoEntity findByVehiculoPlacaAndFechaSalida(String placa, Date fechaSalida);
 
-	@Modifying
-	@Query("update ServicioParqueoEntity serv set serv.pagado = true where serv.vehiculo.placa = :placa and serv.fechaSalida = :fechaSalida")
-	int updateValorByPlacaAndFechaSalida(@Param(value = "placa") String placa, @Param(value = "fechaSalida") Date fechaSalida);
+	Integer countByVehiculoTipoVehiculoAndPagadoFalse(String tipoVehiculo);
+	
+	List<ServicioParqueoEntity> findByPagadoFalse();
+	
+	@Modifying(clearAutomatically = true)
+	@Transactional
+	@Query("update ServicioParqueoEntity serv set serv.fechaSalida = :fechaSalida, serv.valor = :valor where serv.vehiculo.placa = :placa  and serv.fechaSalida = null")
+	int registrarSalidaVehiculo(@Param("placa") String placa, @Param("fechaSalida") Date fechaSalida, @Param("valor") long valor);
 
-	@Modifying
-	@Query("update ServicioParqueoEntity serv set serv.fechaSalida = :fechaSalida, serv.valor = :valor where serv.vehiculo.placa = :placa and serv.fechaSalida = null")
-	int updateFechaSalidaByPlaca(@Param(value = "fechaSalida") Date fechaSalida, @Param(value = "valor") long valor, @Param(value = "placa") String placa);
-	
-	Integer countByVehiculoTipoVehiculoAndFechaSalidaNull(String tipoVehiculo);
-	
-	List<ServicioParqueoEntity> findByFechaSalidaNull();
+	@Modifying(clearAutomatically = true)
+	@Transactional
+	@Query("update ServicioParqueoEntity serv set serv.pagado = :pagado where serv.vehiculo.placa = :placa and serv.pagado = null and serv.fechaSalida != null")
+	int registrarPagoServicio(@Param("pagado") Boolean pagado, @Param("placa") String placa);
+
 }

@@ -14,15 +14,9 @@ public interface RepositorioServicioParqueo {
 	
 	/**
 	 * Permite registrar la salida del vehiculo
-	 * 	 * @param vehiculo
+	 * @param vehiculo
 	 */
-	void registrarSalidaVehiculo(ServicioParqueo servicioParqueo);
-	
-	/**
-	 * Permite registrar el efectivo pago del servicio
-	 * 	 * @param vehiculo
-	 */
-	void registrarPagoServicio (String placa, Date fechaFinalizacion);
+	void registrarSalidaVehiculo (ServicioParqueo servicio);
 	
 	/**
 	 * Permite buscar un servicio activo con base en la placa del vehiculo
@@ -36,8 +30,13 @@ public interface RepositorioServicioParqueo {
 	List<ServicioParqueo> obtenerVehiculosParqueadero ();
 
 	/**
-	 * Obtiene el numero de vehiculos parquedos actualmente segun el tipo de vehiculo
-	 * @param placa vehiculo a buscar
+	 * Retorna el numero de vehiculos parqueados actualmente
 	 */
-	Integer obtenerNumeroVehiculosParqueados(String tipoVehiculo);
+	Integer obtenerNumeroVehiculosParqueados(String tipo);
+
+	/**
+	 * Permite registrar el pago del servicio
+	 * @param servicioParqueo
+	 */
+	void registrarPagoServicio(Boolean pagado, String placa);
 }
