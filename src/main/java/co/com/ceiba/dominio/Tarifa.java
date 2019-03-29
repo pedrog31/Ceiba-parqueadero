@@ -93,6 +93,8 @@ public class Tarifa {
 				case '=':
 					recargoCilindraje = cilindraje.equals(cilindrajeTarifa);
 					break;
+				default:
+					return false;
 			}
 		}
 		return this.horaCaduca == this.horaInicio && recargoCilindraje;

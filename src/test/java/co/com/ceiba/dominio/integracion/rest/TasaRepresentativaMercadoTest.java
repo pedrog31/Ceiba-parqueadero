@@ -3,8 +3,7 @@ package co.com.ceiba.dominio.integracion.rest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.util.Date;
-
+import java.util.Calendar;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +26,12 @@ public class TasaRepresentativaMercadoTest {
 	public void obtenerTasaRepresentativaMercadoTest () {
 		try {
 			TasaRepresentativaMercado tasaMercado = repositorioTasaRepresentativaMercado.obtenerTasaRepresentativaMercadoActual();
-			assertEquals(tasaMercado.getValidoDesde().getDate(), (new Date()).getDate());
+			Calendar cValidoDesde = Calendar.getInstance();
+			cValidoDesde.setTime(tasaMercado.getValidoDesde());
+			assertEquals(cValidoDesde.get(Calendar.DAY_OF_YEAR), Calendar.getInstance().get(Calendar.DAY_OF_YEAR));
 		} catch (VigilanteExcepcion ve) {
 			fail();
 		}
 		
 	}
-}
+} 
