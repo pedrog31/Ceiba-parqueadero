@@ -6,28 +6,36 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import co.com.ceiba.dominio.Vehiculo;
 
 public class VehiculoTestDataBuilder {
+	
+	public static final Integer CILINDRAJE_ESTATICO = 600;
 	private static final String PLACA_ESTATICA = "PYJ41D";
-	public static final String CARRO_ESTATICO = "Carro";
 	public static final String MOTO_ESTATICO = "Moto";
-	public static final String MOTOAC_ESTATICO = "MotoAC";
+	public static final String CARRO_ESTATICO = "Carro";
 	
 	private String tipo;
 	private String placa;
+	private Integer cilindraje;
 	private ObjectMapper objectMapper;
 	
 	public VehiculoTestDataBuilder() {
 		super();
-		this.tipo = CARRO_ESTATICO;
+		this.tipo = MOTO_ESTATICO;
 		this.placa = PLACA_ESTATICA;
+		this.cilindraje = CILINDRAJE_ESTATICO;
 		objectMapper = new ObjectMapper(); 
 	}
 	
 	public Vehiculo build () {
-		return new Vehiculo (this.placa, this.tipo);
+		return new Vehiculo (this.placa, this.cilindraje, this.tipo);
 	}
 	
 	public String buildJsonString () throws JsonProcessingException {
 		return objectMapper.writeValueAsString(this.build());
+	}
+	
+	public VehiculoTestDataBuilder conCilindraje (Integer cilindraje) {
+		this.cilindraje = cilindraje;
+		return this;
 	}
 	
 	public VehiculoTestDataBuilder conTipo (String tipo) {

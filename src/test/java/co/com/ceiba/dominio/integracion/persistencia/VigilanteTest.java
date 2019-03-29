@@ -49,7 +49,7 @@ public class VigilanteTest extends AbstractTransactionalJUnit4SpringContextTests
 	public void registrarSalidaVehiculoITest() {
 		Vehiculo vehiculo = vehiculoTestDataBuilder.build();
 		vigilante.registrarIngresoVehiculo(vehiculo);
-		ServicioParqueo servicioParqueo = vigilante.registrarSalidaVehiculo(vehiculo.getPlaca());
+		ServicioParqueo servicioParqueo = vigilante.consultarServicio(vehiculo.getPlaca());
 		ServicioParqueo servicioParqueoGuardado = repositorioServicioParqueo.buscarServicioVehiculo(vehiculo.getPlaca(),
 				servicioParqueo.getFechaSalida());
 		Assert.assertTrue(servicioParqueoTestDataBuilder.sonIguales(servicioParqueo, servicioParqueoGuardado));
@@ -59,7 +59,7 @@ public class VigilanteTest extends AbstractTransactionalJUnit4SpringContextTests
 	public void registrarPagoVehiculoITest() {
 		Vehiculo vehiculo = vehiculoTestDataBuilder.build();
 		vigilante.registrarIngresoVehiculo(vehiculo);
-		ServicioParqueo servicioParqueo = vigilante.registrarSalidaVehiculo(vehiculo.getPlaca());
+		ServicioParqueo servicioParqueo = vigilante.consultarServicio(vehiculo.getPlaca());
 		vigilante.registrarPagoServicio(true, vehiculo.getPlaca());
 		ServicioParqueo servicioParqueoGuardado = repositorioServicioParqueo.buscarServicioVehiculo(vehiculo.getPlaca(),
 				servicioParqueo.getFechaSalida());

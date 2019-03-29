@@ -13,19 +13,19 @@ public class RestriccionEntity {
 	@Column(nullable = false)
 	private Long identificador;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Integer capacidad;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Integer diaAplicacion;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String expresionRegular;
 	
 	@Column(nullable = false)
 	private boolean esActiva;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String tipoVehiculo;
 	
 	public RestriccionEntity() {

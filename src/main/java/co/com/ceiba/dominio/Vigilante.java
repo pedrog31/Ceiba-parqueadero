@@ -9,6 +9,8 @@ import co.com.ceiba.dominio.excepcion.VigilanteExcepcion;
 import co.com.ceiba.dominio.repositorio.RepositorioRestriccion;
 import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
 import co.com.ceiba.dominio.repositorio.RepositorioTarifas;
+import co.com.ceiba.dominio.repositorio.RepositorioTasaRepresentativaMercado;
+import co.com.ceiba.dominio.repositorio.RepositorioVehiculo;
 
 public class Vigilante {
 
@@ -18,16 +20,36 @@ public class Vigilante {
 	private RepositorioServicioParqueo respositorioServicioParqueo;
 	private RepositorioRestriccion repositorioRestricciones;
 	private RepositorioTarifas repositorioTarifas;
+	private RepositorioVehiculo repositorioVehiculo;
+	private RepositorioTasaRepresentativaMercado repositorioTasaRepresentativaMercado;
 	
 	//private List<ValidacionesIngreso> validates:
 
 	public Vigilante(
 			RepositorioServicioParqueo respositorioServicioParqueo,
 			RepositorioRestriccion repositorioRestricciones, 
-			RepositorioTarifas repositorioTarifas) {
+			RepositorioTarifas repositorioTarifas,
+			RepositorioVehiculo repositorioVehiculo,
+			RepositorioTasaRepresentativaMercado repositorioTasaRepresentativaMercado) {
 		this.respositorioServicioParqueo = respositorioServicioParqueo;
 		this.repositorioRestricciones = repositorioRestricciones;
 		this.repositorioTarifas = repositorioTarifas;
+		this.repositorioVehiculo = repositorioVehiculo;
+		this.repositorioTasaRepresentativaMercado = repositorioTasaRepresentativaMercado;
+	}
+	
+	public ServicioParqueo consultarServicio (String placa) {
+		ServicioParqueo servicioParqueo = respositorioServicioParqueo.buscarServicioVehiculo(placa);
+		if (servicioParqueo.esVehiculoNuevo()) {
+			Vehiculo vehiculo = repositorioVehiculo.obtenerVehiculoPorPlaca(placa);
+			if (vehiculo == null)
+				vehiculo = new Vehiculo(placa, null, null);
+			return new ServicioParqueo(null, vehiculo); 
+		} else if (servicioParqueo.esVehiculoIngresado()) {
+			return this.registrarSalidaVehiculo(servicioParqueo);
+		} else {
+			return servicioParqueo;
+		}
 	}
 
 	public ServicioParqueo registrarIngresoVehiculo(Vehiculo vehiculo) {
@@ -56,8 +78,7 @@ public class Vigilante {
 		}
 	}
  
-	public ServicioParqueo registrarSalidaVehiculo(String placa) {
-		ServicioParqueo servicioParqueo = respositorioServicioParqueo.buscarServicioVehiculo(placa, null);
+	private ServicioParqueo registrarSalidaVehiculo(ServicioParqueo servicioParqueo) {
 		List<Tarifa> tarifas = repositorioTarifas.obtenerTarifasPorTipoVehiculo(servicioParqueo.getVehiculo().getTipo());
 		servicioParqueo.setTarifas(tarifas);
 		servicioParqueo.setFechaSalida(new Date()); 
@@ -72,5 +93,9 @@ public class Vigilante {
 	
 	public List<ServicioParqueo> obtenerVehiculosParqueados () {
 		return respositorioServicioParqueo.obtenerVehiculosParqueadero();
+	}
+	
+	public TasaRepresentativaMercado obtenerTasaRepresentativaMercadoActual () {
+		return repositorioTasaRepresentativaMercado.obtenerTasaRepresentativaMercadoActual();
 	}
  }

@@ -13,6 +13,9 @@ public class TarifaEntity {
 	@Column(nullable = false)
 	private Long identificador;
 	
+	@Column (nullable = true)
+	private String cilindraje;
+	
 	@Column(nullable = false)
 	private byte horaCaduca;
 	
@@ -24,14 +27,15 @@ public class TarifaEntity {
 	
 	@Column(nullable = false)
 	private int valor;
-	
+
 	public TarifaEntity() {
-		
+		super();
 	}
 
-	public TarifaEntity(byte horaCaduca, byte horaInicio, String tipoVehiculo,
+	public TarifaEntity(String cilindraje, byte horaCaduca, byte horaInicio, String tipoVehiculo,
 			int valor) {
 		super();
+		this.cilindraje = cilindraje;
 		this.horaCaduca = horaCaduca;
 		this.horaInicio = horaInicio;
 		this.tipoVehiculo = tipoVehiculo;
@@ -44,6 +48,14 @@ public class TarifaEntity {
 
 	public void setIdentificador(Long identificador) {
 		this.identificador = identificador;
+	}
+
+	public String getCilindraje() {
+		return cilindraje;
+	}
+
+	public void setCilindraje(String cilindraje) {
+		this.cilindraje = cilindraje;
 	}
 
 	public byte getHoraCaduca() {

@@ -70,26 +70,30 @@ public class ServicioParqueo {
 
 	public void calcularValorServicio() {
 		long horas = Tarifa.obtenerNumeroHoras(fechaIngreso, fechaSalida);
-		this.valor = calcularValorTarifa(horas);
+		this.valor = this.buscarRecargos() + calcularValorTarifa(horas);
+	}
+
+	private long buscarRecargos() {
+		for (Tarifa tarifaActual: this.tarifas)
+			if (tarifaActual.esRecargo(this.vehiculo.getCilindraje()))
+				return tarifaActual.getValor();
+		return 0;
 	}
 
 	private long calcularValorTarifa(long horas) {
-		long valorDia = 0;
-		Tarifa tarifaActual = null;
-		for (int i=0; i < tarifas.size(); i++) {
-			tarifaActual = tarifas.get(i);
-			if (tarifaActual.esRecargo()) {
-				tarifas.remove(i);
-				return tarifaActual.getValor() + calcularValorTarifa(horas);
-			} else if (tarifaActual.aplicaCobroPorHoras(horas)) {
-				tarifas.remove(i);
+		for (Tarifa tarifaActual: this.tarifas)
+			if (tarifaActual.aplicaCobroPorHoras(horas))
 				return horas * tarifaActual.getValor();
-			} else if (tarifaActual.aplicaCobroPorDia()) {
-				tarifas.remove(i);
-				horas -= Tarifa.HORAS_DIA;
-				valorDia = tarifaActual.getValor() + calcularValorTarifa(horas);
-			}
-		}
-		return valorDia;
+			else if (tarifaActual.aplicaCobroPorDia(horas))
+				return tarifaActual.getValor() + calcularValorTarifa(horas - Tarifa.HORAS_DIA);
+		return 0;
+	}
+
+	public boolean esVehiculoNuevo() {
+		return this.getFechaIngreso() == null;
+	}
+
+	public boolean esVehiculoIngresado() {
+		return this.getFechaSalida() == null;
 	}
 }

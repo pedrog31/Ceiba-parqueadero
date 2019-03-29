@@ -8,4 +8,6 @@ import co.com.ceiba.persistencia.entidad.VehiculoEntity;
 @Repository
 public interface RepositorioVehiculoJPA extends JpaRepository<VehiculoEntity, String> {
 
+	VehiculoEntity findByPlaca(String placa);
+
 }

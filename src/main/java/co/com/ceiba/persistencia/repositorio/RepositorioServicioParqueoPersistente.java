@@ -12,7 +12,6 @@ import co.com.ceiba.dominio.excepcion.ServicioParqueoExcepcion;
 import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
 import co.com.ceiba.persistencia.builder.ServicioParqueoBuilder;
 import co.com.ceiba.persistencia.builder.VehiculoBuilder;
-import co.com.ceiba.persistencia.entidad.ServicioParqueoEntity;
 import co.com.ceiba.persistencia.entidad.VehiculoEntity;
 import co.com.ceiba.persistencia.repositorio.jpa.RepositorioServicioParqueoJPA;
 import co.com.ceiba.persistencia.repositorio.jpa.RepositorioVehiculoJPA;
@@ -56,17 +55,21 @@ public class RepositorioServicioParqueoPersistente implements RepositorioServici
 
 	@Override
 	public List<ServicioParqueo> obtenerVehiculosParqueadero() {
-		return ServicioParqueoBuilder.convertirADominio(repositorioServicioParqueoJPA.findByPagadoFalse());
+		return ServicioParqueoBuilder.convertirADominio(repositorioServicioParqueoJPA.findByPagadoNull());
 	}
 
 	@Override
 	public ServicioParqueo buscarServicioVehiculo(String placa, Date fechaSalida) {
-		ServicioParqueoEntity servicioParqueoEntity = repositorioServicioParqueoJPA.findByVehiculoPlacaAndFechaSalida(placa, fechaSalida);
-		return ServicioParqueoBuilder.convertirADominio(servicioParqueoEntity);
+		return ServicioParqueoBuilder.convertirADominio(repositorioServicioParqueoJPA.findByVehiculoPlacaAndFechaSalida(placa, fechaSalida));
 	}
 
 	@Override
 	public Integer obtenerNumeroVehiculosParqueados(String tipoVehiculo) {
-		return repositorioServicioParqueoJPA.countByVehiculoTipoVehiculoAndPagadoFalse(tipoVehiculo);
+		return repositorioServicioParqueoJPA.countByVehiculoTipoVehiculoAndPagadoNull(tipoVehiculo);
+	}
+
+	@Override
+	public ServicioParqueo buscarServicioVehiculo(String placa) {
+		return ServicioParqueoBuilder.convertirADominio(repositorioServicioParqueoJPA.findByVehiculoPlacaAndPagadoNull(placa));
 	}
 }

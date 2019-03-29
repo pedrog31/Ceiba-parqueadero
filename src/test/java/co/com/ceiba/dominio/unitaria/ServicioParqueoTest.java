@@ -24,7 +24,6 @@ public class ServicioParqueoTest {
 	private static Date fechaActual;
 	private static final String TIPO_CARRO = "Carro";
 	private static final String TIPO_MOTO = "Moto";
-	private static final String TIPO_MOTOAC = "MotoAC";
 
 	@BeforeClass
 	public static void iniciarServicioParqueoTest() {
@@ -102,7 +101,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoMasNueveHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 10);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).conCilindraje(490).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		servicioParqueo.calcularValorServicio();
@@ -114,7 +113,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoMenosVeinticuatroHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 23);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).conCilindraje(490).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		servicioParqueo.calcularValorServicio();
@@ -126,7 +125,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoMasVeinticuatroHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 27);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).conCilindraje(490).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		servicioParqueo.calcularValorServicio();
@@ -138,7 +137,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoACMenosNueveHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 5);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(TIPO_MOTOAC).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).conCilindraje(510).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		servicioParqueo.calcularValorServicio();
@@ -150,7 +149,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoACMasNueveHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 10);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(TIPO_MOTOAC).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).conCilindraje(510).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		servicioParqueo.calcularValorServicio();
@@ -162,7 +161,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoACMenosVeinticuatroHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 23);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(TIPO_MOTOAC).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).conCilindraje(510).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		servicioParqueo.calcularValorServicio();
@@ -174,7 +173,7 @@ public class ServicioParqueoTest {
 	public void calcularValorParqueaderoMotoACMasVeinticuatroHorasTest() {
 	    calendarInstance.add(Calendar.HOUR_OF_DAY, 27);
 		servicioParqueoTestDataBuilder.conVehiculo(
-				vehiculoTestDataBuilder.conTipo(TIPO_MOTOAC).build())
+				vehiculoTestDataBuilder.conTipo(TIPO_MOTO).conCilindraje(510).build())
 				.conFechaIngreso(fechaActual).conFechaSalida(calendarInstance.getTime());
 		ServicioParqueo servicioParqueo = servicioParqueoTestDataBuilder.build();
 		servicioParqueo.calcularValorServicio();

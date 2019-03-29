@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -24,9 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import co.com.ceiba.dominio.ServicioParqueo;
 import co.com.ceiba.dominio.Vehiculo;
 import co.com.ceiba.dominio.Vigilante;
-import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
 import co.com.ceiba.framework.springboot.CeibaEstacionamientoApplication;
-import co.com.ceiba.testdatabuilder.ServicioParqueoTestDataBuilder;
 import co.com.ceiba.testdatabuilder.VehiculoTestDataBuilder;
 
 @RunWith(SpringRunner.class)
@@ -66,7 +63,7 @@ public class VigilanteTest extends AbstractTransactionalJUnit4SpringContextTests
 		vigilante.registrarIngresoVehiculo(vehiculo);
 		MvcResult mvcResult = mockMvc.perform(
 				MockMvcRequestBuilders
-					.post("/vigilante/salida")
+					.post("/vigilante/consulta-servicio")
 					.param("placa", vehiculo.getPlaca()))
 				.andExpect(status().isOk()).andReturn();
 		ServicioParqueo servicioParqueo = objectMapper.readValue(
@@ -78,7 +75,7 @@ public class VigilanteTest extends AbstractTransactionalJUnit4SpringContextTests
 	public void registrarPagoVehiculoITest() throws Exception {
 		Vehiculo vehiculo = vehiculoTestDataBuilder.build();
 		vigilante.registrarIngresoVehiculo(vehiculo);
-		vigilante.registrarSalidaVehiculo(vehiculo.getPlaca());
+		vigilante.consultarServicio(vehiculo.getPlaca());
 		mockMvc.perform(
 				MockMvcRequestBuilders
 					.post("/vigilante/pago")

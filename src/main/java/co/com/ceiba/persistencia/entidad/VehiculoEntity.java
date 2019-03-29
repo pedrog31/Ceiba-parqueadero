@@ -13,15 +13,19 @@ public class VehiculoEntity {
 	private String placa;
 	
 	@Column(nullable = false)
+	private Integer cilindraje;
+	
+	@Column(nullable = false)
 	private String tipoVehiculo;
 	
 	public VehiculoEntity() {
 		super();
 	}
 
-	public VehiculoEntity(String placa, String tipoVehiculo) {
+	public VehiculoEntity(String placa, Integer cilindraje, String tipoVehiculo) {
 		super();
 		this.placa = placa;
+		this.cilindraje = cilindraje;
 		this.tipoVehiculo = tipoVehiculo;
 	}
 
@@ -31,6 +35,14 @@ public class VehiculoEntity {
 
 	public void setPlaca(String placa) {
 		this.placa = placa;
+	}
+
+	public Integer getCilindraje() {
+		return cilindraje;
+	}
+
+	public void setCilindraje(Integer cilindraje) {
+		this.cilindraje = cilindraje;
 	}
 
 	public String getTipoVehiculo() {

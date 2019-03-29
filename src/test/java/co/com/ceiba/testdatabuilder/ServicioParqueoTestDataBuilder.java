@@ -20,21 +20,17 @@ public class ServicioParqueoTestDataBuilder {
 	private static final Date FECHA_SALIDA_ESTATICO = new Date(1552999500L);
 	private static final String CARRO_ESTATICO = "Carro";
 	private static final String MOTO_ESTATICA = "Moto";
-	private static final String MOTO_AC_ESTATICA = "MotoAC";
 	private static final List<Tarifa> TARIFAS_ESTATICAS = new ArrayList<> (Arrays.asList(
-				new Tarifa((byte) 9, (byte) 0, CARRO_ESTATICO, 1000),
-				new Tarifa((byte) -1, (byte) 9, CARRO_ESTATICO, 8000),
-				new Tarifa((byte) 9, (byte) 0, MOTO_ESTATICA, 500),
-				new Tarifa((byte) -1, (byte) 9, MOTO_ESTATICA, 4000),
-				new Tarifa((byte) 0, (byte) 0, MOTO_AC_ESTATICA, 2000),
-				new Tarifa((byte) 9, (byte) 0, MOTO_AC_ESTATICA, 500),
-				new Tarifa((byte) -1, (byte) 9, MOTO_AC_ESTATICA, 4000)
+				new Tarifa(null, (byte) 9, (byte) 0, CARRO_ESTATICO, 1000),
+				new Tarifa(null, (byte) -1, (byte) 9, CARRO_ESTATICO, 8000),
+				new Tarifa(null, (byte) 9, (byte) 0, MOTO_ESTATICA, 500),
+				new Tarifa(null, (byte) -1, (byte) 9, MOTO_ESTATICA, 4000),
+				new Tarifa(">500", (byte) 0, (byte) 0, MOTO_ESTATICA, 2000)
 			));
 	private Date fechaIngreso;
 	private Date fechaSalida;
 	private Vehiculo vehiculo;
 	private List<Tarifa> tarifas;
-	
 	
 	public ServicioParqueoTestDataBuilder () {
 		super();

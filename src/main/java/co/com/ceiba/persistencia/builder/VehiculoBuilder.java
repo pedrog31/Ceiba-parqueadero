@@ -11,6 +11,7 @@ public final class VehiculoBuilder {
 		return vehiculoEntity == null  ? 
 				null : new Vehiculo(
 				vehiculoEntity.getPlaca(),
+				vehiculoEntity.getCilindraje(),
 				vehiculoEntity.getTipoVehiculo()
 				);		
 	}
@@ -19,6 +20,7 @@ public final class VehiculoBuilder {
 		return vehiculo == null  ? 
 				null : new VehiculoEntity(
 				vehiculo.getPlaca(),
+				vehiculo.getCilindraje(),
 				vehiculo.getTipo()
 				);
 	}

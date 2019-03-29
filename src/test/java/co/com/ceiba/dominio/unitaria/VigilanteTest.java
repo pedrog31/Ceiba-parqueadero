@@ -23,6 +23,8 @@ import co.com.ceiba.dominio.excepcion.VigilanteExcepcion;
 import co.com.ceiba.dominio.repositorio.RepositorioRestriccion;
 import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
 import co.com.ceiba.dominio.repositorio.RepositorioTarifas;
+import co.com.ceiba.dominio.repositorio.RepositorioTasaRepresentativaMercado;
+import co.com.ceiba.dominio.repositorio.RepositorioVehiculo;
 import co.com.ceiba.testdatabuilder.VehiculoTestDataBuilder;
 
 @RunWith(SpringRunner.class)
@@ -32,6 +34,8 @@ public class VigilanteTest {
 	private static RepositorioRestriccion repositorioRestricciones;
 	private static RepositorioServicioParqueo respositorioServicioParqueo;
 	private static RepositorioTarifas repositorioTarifas;
+	private static RepositorioVehiculo repositorioVehiculo;
+	private static RepositorioTasaRepresentativaMercado repositorioTasaRepresentativaMercado;
 	private Vigilante vigilante;
 	static List<Restriccion> restricciones;
 
@@ -46,12 +50,14 @@ public class VigilanteTest {
 		repositorioRestricciones = mock(RepositorioRestriccion.class);
 		respositorioServicioParqueo = mock(RepositorioServicioParqueo.class);
 		repositorioTarifas = mock(RepositorioTarifas.class);
+		repositorioVehiculo = mock(RepositorioVehiculo.class);
+		repositorioTasaRepresentativaMercado = mock(RepositorioTasaRepresentativaMercado.class);
 		restricciones = new ArrayList<>();
 	}
 
 	@Before
 	public void iniciarTest() {
-		vigilante = new Vigilante(respositorioServicioParqueo, repositorioRestricciones, repositorioTarifas);
+		vigilante = new Vigilante(respositorioServicioParqueo, repositorioRestricciones, repositorioTarifas, repositorioVehiculo, repositorioTasaRepresentativaMercado);
 	}
 	
 	private void actualizarRestricciones(String tipoVehiculo) {
@@ -119,7 +125,7 @@ public class VigilanteTest {
 	@Test
 	public void ingresarMotoACServicioParqueoLleno() {
 		try {
-			Vehiculo vehiculo = vehiculoTestDataBuilder.conTipo(VehiculoTestDataBuilder.MOTOAC_ESTATICO).conPlaca("").build();
+			Vehiculo vehiculo = vehiculoTestDataBuilder.conTipo(VehiculoTestDataBuilder.MOTO_ESTATICO).conPlaca("").build();
 			this.actualizarRestricciones(vehiculo.getTipo());
 			when(respositorioServicioParqueo.obtenerNumeroVehiculosParqueados(vehiculo.getTipo())).thenReturn(10);
 			vigilante.registrarIngresoVehiculo(vehiculo);
@@ -132,7 +138,7 @@ public class VigilanteTest {
 	@Test
 	public void ingresarMotoACServicioParqueoDisponible() {
 		try {
-			Vehiculo vehiculo = vehiculoTestDataBuilder.conTipo(VehiculoTestDataBuilder.MOTOAC_ESTATICO).conPlaca("").build();
+			Vehiculo vehiculo = vehiculoTestDataBuilder.conTipo(VehiculoTestDataBuilder.MOTO_ESTATICO).conPlaca("").build();
 			this.actualizarRestricciones(vehiculo.getTipo());
 			when(respositorioServicioParqueo.obtenerNumeroVehiculosParqueados(vehiculo.getTipo())).thenReturn(9);
 			vigilante.registrarIngresoVehiculo(vehiculo);

@@ -25,14 +25,21 @@ public interface RepositorioServicioParqueo {
 	ServicioParqueo buscarServicioVehiculo (String placa, Date fechaSalida);
 	
 	/**
+	 * Permite buscar un servicio activo con base en la placa del vehiculo
+	 * @param placa vehiculo a buscar
+	 */
+	ServicioParqueo buscarServicioVehiculo(String placa);
+	
+	/**
 	 * Retorna todos los servicios que se encuentran actualmente activos en el parqueadero
 	 */
 	List<ServicioParqueo> obtenerVehiculosParqueadero ();
 
 	/**
 	 * Retorna el numero de vehiculos parqueados actualmente
+	 * @param tipoVehiculoRestriccion 
 	 */
-	Integer obtenerNumeroVehiculosParqueados(String tipo);
+	Integer obtenerNumeroVehiculosParqueados(String tipoVehiculo);
 
 	/**
 	 * Permite registrar el pago del servicio

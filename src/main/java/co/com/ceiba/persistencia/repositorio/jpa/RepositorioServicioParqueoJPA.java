@@ -17,9 +17,11 @@ public interface RepositorioServicioParqueoJPA extends JpaRepository<ServicioPar
 
 	ServicioParqueoEntity findByVehiculoPlacaAndFechaSalida(String placa, Date fechaSalida);
 
-	Integer countByVehiculoTipoVehiculoAndPagadoFalse(String tipoVehiculo);
+	ServicioParqueoEntity findByVehiculoPlacaAndPagadoNull(String placa);
+
+	Integer countByVehiculoTipoVehiculoAndPagadoNull(String tipoVehiculo);
 	
-	List<ServicioParqueoEntity> findByPagadoFalse();
+	List<ServicioParqueoEntity> findByPagadoNull();
 	
 	@Modifying(clearAutomatically = true)
 	@Transactional
@@ -28,7 +30,7 @@ public interface RepositorioServicioParqueoJPA extends JpaRepository<ServicioPar
 
 	@Modifying(clearAutomatically = true)
 	@Transactional
-	@Query("update ServicioParqueoEntity serv set serv.pagado = :pagado where serv.vehiculo.placa = :placa and serv.fechaSalida != null")
+	@Query("update ServicioParqueoEntity serv set serv.pagado = :pagado where serv.vehiculo.placa = :placa and serv.fechaSalida != null and serv.pagado = null")
 	int registrarPagoServicio(@Param("pagado") Boolean pagado, @Param("placa") String placa);
 
 }

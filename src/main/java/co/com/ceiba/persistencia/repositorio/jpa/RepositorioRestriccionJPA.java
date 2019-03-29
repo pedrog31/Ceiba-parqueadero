@@ -9,5 +9,5 @@ import co.com.ceiba.persistencia.entidad.RestriccionEntity;
 @Repository
 public interface RepositorioRestriccionJPA  extends JpaRepository<RestriccionEntity, Long> {
 	
-	List<RestriccionEntity> findByDiaAplicacionAndTipoVehiculoStartingWithAndEsActiva (Integer diaAplicacion, String tipoVehiculo, boolean esActiva);
+	List<RestriccionEntity> findByDiaAplicacionOrDiaAplicacionNullAndTipoVehiculoAndEsActiva (Integer diaAplicacion, String tipoVehiculo, boolean esActiva);
 }

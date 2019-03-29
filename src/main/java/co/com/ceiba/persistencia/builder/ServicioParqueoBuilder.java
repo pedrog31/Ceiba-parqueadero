@@ -12,7 +12,7 @@ public final class ServicioParqueoBuilder {
 	}
 
 	public static ServicioParqueo convertirADominio(ServicioParqueoEntity servicioParqueoEntity) {
-		return servicioParqueoEntity == null ? null
+		return servicioParqueoEntity == null ? new ServicioParqueo()
 				: new ServicioParqueo(
 						servicioParqueoEntity.getFechaIngreso(), 
 						servicioParqueoEntity.getFechaSalida(),
