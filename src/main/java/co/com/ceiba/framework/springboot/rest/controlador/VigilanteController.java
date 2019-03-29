@@ -53,9 +53,6 @@ public class VigilanteController {
 	@GetMapping(value = "/trm")
 	public ResponseEntity<TasaRepresentativaMercado> obtenerTasaRepresentativaMercadoActual () {
 		TasaRepresentativaMercado tasaRepresentativaMercado = vigilante.obtenerTasaRepresentativaMercadoActual();
-		if (tasaRepresentativaMercado == null) {
-			throw new VigilanteExcepcion("Error servicio TRM");
-		}
 		return new ResponseEntity<> (tasaRepresentativaMercado, HttpStatus.OK);
 	}
 	
