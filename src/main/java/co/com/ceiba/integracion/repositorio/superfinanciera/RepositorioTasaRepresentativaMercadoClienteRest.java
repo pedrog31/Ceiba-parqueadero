@@ -2,11 +2,10 @@ package co.com.ceiba.integracion.repositorio.superfinanciera;
 
 import java.rmi.RemoteException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import co.com.ceiba.dominio.TasaRepresentativaMercado;
+import co.com.ceiba.dominio.excepcion.VigilanteExcepcion;
 import co.com.ceiba.dominio.repositorio.RepositorioTasaRepresentativaMercado;
 import co.com.sc.nexura.superfinanciera.action.generic.services.trm.action.TCRMServicesInterfaceProxy;
 import co.com.sc.nexura.superfinanciera.action.generic.services.trm.action.TcrmResponse;
@@ -15,7 +14,6 @@ import co.com.sc.nexura.superfinanciera.action.generic.services.trm.action.TcrmR
 public class RepositorioTasaRepresentativaMercadoClienteRest implements RepositorioTasaRepresentativaMercado {
 
 	private static final String WEB_SERVICE_URL = "https://www.superfinanciera.gov.co/SuperfinancieraWebServiceTRM/TCRMServicesWebService/TCRMServicesWebService?WSDL";
-	private static final Logger logger = LoggerFactory.getLogger(RepositorioTasaRepresentativaMercado.class);
 	   
 	@Override
 	public TasaRepresentativaMercado obtenerTasaRepresentativaMercadoActual() {
@@ -29,8 +27,7 @@ public class RepositorioTasaRepresentativaMercadoClienteRest implements Reposito
 						tcrmResponse.getValidityTo().getTime(),
 						tcrmResponse.getValue());
 			} catch (RemoteException e) {
-				logger.error(e.getMessage());
-				return null;
+				throw new VigilanteExcepcion(e);
 			}
 	}
 

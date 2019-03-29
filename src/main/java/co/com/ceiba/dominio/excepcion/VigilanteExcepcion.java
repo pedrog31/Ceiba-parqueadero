@@ -8,4 +8,8 @@ public class VigilanteExcepcion extends RuntimeException {
 		super(message);
 	}
 
+	public VigilanteExcepcion(Exception e) {
+		super(e);
+	}
+
 }
