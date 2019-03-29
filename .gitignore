@@ -128,7 +128,7 @@ gradle-app.setting
 !gradle-wrapper.jar
 
 # Avoid ignoring SuperfinancieraWebServiceTRMClientJava jar file (.jar files are usually ignored)
-!SuperfinancieraWebServiceTRMClientJava.jar
+!libs/SuperfinancieraWebServiceTRMClientJava.jar
 
 # Cache of project
 .gradletasknamecache
