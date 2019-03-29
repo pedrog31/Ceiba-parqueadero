@@ -1,5 +1,8 @@
 package co.com.ceiba.dominio.integracion.persistencia;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import co.com.ceiba.dominio.ServicioParqueo;
 import co.com.ceiba.dominio.Vehiculo;
 import co.com.ceiba.dominio.Vigilante;
+import co.com.ceiba.dominio.excepcion.ServicioParqueoExcepcion;
 import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
 import co.com.ceiba.framework.springboot.CeibaEstacionamientoApplication;
 import co.com.ceiba.testdatabuilder.ServicioParqueoTestDataBuilder;
@@ -43,6 +47,32 @@ public class VigilanteTest extends AbstractTransactionalJUnit4SpringContextTests
 		ServicioParqueo servicioParqueoGuardado = repositorioServicioParqueo.buscarServicioVehiculo(vehiculo.getPlaca(),
 				null);
 		Assert.assertTrue(servicioParqueoTestDataBuilder.sonIguales(servicioParqueo, servicioParqueoGuardado));
+	}
+
+	@Test
+	public void registrarDobleIngresoVehiculoSalidaITest() {
+		try {
+			Vehiculo vehiculo = vehiculoTestDataBuilder.build();
+			vigilante.registrarIngresoVehiculo(vehiculo);
+			ServicioParqueo servicioParqueo = vigilante.registrarIngresoVehiculo(vehiculo);
+			repositorioServicioParqueo.registrarSalidaVehiculo(servicioParqueo);
+			fail();
+		} catch (ServicioParqueoExcepcion spe) {
+			assertEquals("Error registrando salida del servicio", spe.getMessage());
+		}
+	}
+
+	@Test
+	public void registrarDobleIngresoVehiculoPagoITest() {
+		try {
+			Vehiculo vehiculo = vehiculoTestDataBuilder.build();
+			vigilante.registrarIngresoVehiculo(vehiculo);
+			vigilante.registrarIngresoVehiculo(vehiculo);
+			repositorioServicioParqueo.registrarPagoServicio(true, vehiculo.getPlaca());
+			fail();
+		} catch (ServicioParqueoExcepcion spe) {
+			assertEquals("Error registrando pago del servicio", spe.getMessage());
+		}
 	}
 
 	@Test

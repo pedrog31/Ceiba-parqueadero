@@ -39,11 +39,11 @@ public class RepositorioServicioParqueoPersistente implements RepositorioServici
 		int numeroActualizaciones = repositorioServicioParqueoJPA.registrarSalidaVehiculo(
 				servicioParqueo.getVehiculo().getPlaca(), servicioParqueo.getFechaSalida(), servicioParqueo.getValor());
 		if (numeroActualizaciones != 1) {
-			throw new ServicioParqueoExcepcion("Error registrando pago del servicio");
+			throw new ServicioParqueoExcepcion("Error registrando salida del servicio");
 		}
 		repositorioServicioParqueoJPA.flush();
 	}
-
+ 
 	@Override
 	public void registrarPagoServicio(Boolean pagado, String placa) {
 		int numeroActualizaciones = repositorioServicioParqueoJPA.registrarPagoServicio(pagado, placa);
