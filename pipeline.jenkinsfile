@@ -71,6 +71,8 @@ pipeline {
 	    stage('Angular Build') {
 	        steps {
 	            echo "------------>SpringBoot Build<------------"
+	            sh 'npm install'
+	            sh 'ng build'
 	        }
 	    }
 	 }
