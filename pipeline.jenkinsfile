@@ -25,8 +25,7 @@ pipeline {
 	    stage('SpringBoot Unit Tests') {
 	        steps{
 	            echo "------------>SpringBoot Unit Tests<------------"
-	            echo "sh 'gradle --b ./build.gradle test'"
-	            
+	            sh 'gradle --b ./build.gradle test'
 	        }
 	    }
 	    stage('SpringBoot Integration Tests') {

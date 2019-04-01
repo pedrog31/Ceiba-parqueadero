@@ -12,7 +12,7 @@ public class VehiculoEntity {
 	@Column(nullable = false)
 	private String placa;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Integer cilindraje;
 	
 	@Column(nullable = false)
