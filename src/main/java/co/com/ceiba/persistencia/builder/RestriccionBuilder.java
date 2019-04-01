@@ -13,15 +13,12 @@ public final class RestriccionBuilder {
 	}
 
 	public static Restriccion convertirADominio(RestriccionEntity restriccionEntity) {
-		return restriccionEntity == null ? null
-				: new Restriccion(restriccionEntity.getCapacidad(), restriccionEntity.getDiaAplicacion(),
+		return new Restriccion(restriccionEntity.getCapacidad(), restriccionEntity.getDiaAplicacion(),
 						restriccionEntity.getExpresionRegular(), restriccionEntity.getTipoVehiculo());
 	}
 
 	public static List<Restriccion> convertirADominio(List<RestriccionEntity> restriccionesEntity) {
 		List<Restriccion> restricciones = new ArrayList<>();
-		if (restriccionesEntity == null)
-			return restricciones;
 		for (RestriccionEntity restriccionEntity : restriccionesEntity) {
 			restricciones.add(convertirADominio(restriccionEntity));
 		}

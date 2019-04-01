@@ -11,8 +11,7 @@ public final class TarifaBuilder {
 	private TarifaBuilder() {}
 	
 	public static Tarifa convertirADominio(TarifaEntity tarifaEntity) {
-		return tarifaEntity == null  ? 
-				null : new Tarifa (
+		return new Tarifa (
 						tarifaEntity.getCilindraje(),
 						tarifaEntity.getHoraCaduca(),
 						tarifaEntity.getHoraInicio(),
@@ -21,9 +20,6 @@ public final class TarifaBuilder {
 	}
 	
 	public static List<Tarifa> convertirADominio(List<TarifaEntity> tarifasEntity) {
-		if (tarifasEntity == null) {
-			return new ArrayList<>();
-		}
 		List<Tarifa> tarifas = new ArrayList<>();
 		for (TarifaEntity tarifaEntity: tarifasEntity) {
 			tarifas.add(convertirADominio (tarifaEntity));
@@ -32,8 +28,7 @@ public final class TarifaBuilder {
 	} 
 	
 	public static TarifaEntity convertirAEntity(Tarifa tarifa) {
-		return tarifa == null  ? 
-				null : new TarifaEntity (
+		return new TarifaEntity (
 						tarifa.getCilindraje(),
 						tarifa.getHoraCaduca(),
 						tarifa.getHoraInicio(),
