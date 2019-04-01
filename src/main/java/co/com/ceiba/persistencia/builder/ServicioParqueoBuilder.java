@@ -12,8 +12,7 @@ public final class ServicioParqueoBuilder {
 	}
 
 	public static ServicioParqueo convertirADominio(ServicioParqueoEntity servicioParqueoEntity) {
-		return servicioParqueoEntity == null ? new ServicioParqueo()
-				: new ServicioParqueo(
+		return new ServicioParqueo(
 						servicioParqueoEntity.getFechaIngreso(), 
 						servicioParqueoEntity.getFechaSalida(),
 						servicioParqueoEntity.getPagado(),
@@ -31,9 +30,6 @@ public final class ServicioParqueoBuilder {
 	}
 
 	public static List<ServicioParqueo> convertirADominio(List<ServicioParqueoEntity> serviciosParqueoEntity) {
-		if (serviciosParqueoEntity == null) {
-			return new ArrayList<>();
-		}
 		List<ServicioParqueo> serviciosParqueo = new ArrayList<>();
 		for (ServicioParqueoEntity servicioParqueoEntity : serviciosParqueoEntity) {
 			serviciosParqueo.add(convertirADominio(servicioParqueoEntity));

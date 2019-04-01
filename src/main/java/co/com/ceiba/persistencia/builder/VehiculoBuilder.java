@@ -8,8 +8,7 @@ public final class VehiculoBuilder {
 	private VehiculoBuilder() {}
 	
 	public static Vehiculo convertirADominio (VehiculoEntity vehiculoEntity) {
-		return vehiculoEntity == null  ? 
-				null : new Vehiculo(
+		return new Vehiculo(
 				vehiculoEntity.getPlaca(),
 				vehiculoEntity.getCilindraje(),
 				vehiculoEntity.getTipoVehiculo()
@@ -17,8 +16,7 @@ public final class VehiculoBuilder {
 	}
 	
 	public static VehiculoEntity convertirAEntity (Vehiculo vehiculo) {
-		return vehiculo == null  ? 
-				null : new VehiculoEntity(
+		return new VehiculoEntity(
 				vehiculo.getPlaca(),
 				vehiculo.getCilindraje(),
 				vehiculo.getTipo()
