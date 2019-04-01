@@ -1,9 +1,8 @@
 package co.com.ceiba.dominio.integracion.rest;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import java.util.Calendar;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +25,11 @@ public class TasaRepresentativaMercadoTest {
 	public void obtenerTasaRepresentativaMercadoTest () {
 		try {
 			TasaRepresentativaMercado tasaMercado = repositorioTasaRepresentativaMercado.obtenerTasaRepresentativaMercadoActual();
-			Calendar cValidoDesde = Calendar.getInstance();
-			cValidoDesde.setTime(tasaMercado.getValidoDesde());
-			assertEquals(cValidoDesde.get(Calendar.DAY_OF_YEAR), Calendar.getInstance().get(Calendar.DAY_OF_YEAR));
+			assertNotNull(tasaMercado);
+			assertNotNull(tasaMercado.getMoneda());
+			assertNotNull(tasaMercado.getValidoDesde());
+			assertNotNull(tasaMercado.getValidoHasta());
+			assertNotNull(tasaMercado.getValor());
 		} catch (VigilanteExcepcion ve) {
 			fail();
 		}
