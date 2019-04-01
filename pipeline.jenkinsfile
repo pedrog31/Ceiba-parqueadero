@@ -50,7 +50,7 @@ pipeline {
 	    }
 	    stage('Angular Checkout'){
 	        steps{
-	            echo "------------>SpringBoot Checkout<------------"
+	            echo "------------>Angular Checkout<------------"
 	            checkout([$class: 'GitSCM', branches: [[name: '*/develop']],
 	            doGenerateSubmoduleConfigurations: false, extensions: [], gitTool:
 	            'Git_Centos', submoduleCfg: [], userRemoteConfigs: [[credentialsId:
@@ -60,18 +60,19 @@ pipeline {
 	    }
 	    stage('Angular Functional Tests') {
 	        steps {
-	            echo "------------>SpringBoot Integration Tests<------------"
+	            echo "------------>Angular Functional Tests<------------"
+	            sh 'npm install'
+	            sh 'ng test'
 	        }
 	    }
 	    stage('Angular Static Code Analysis') {
 	        steps{
-	            echo "------------>SpringBoot Static Code Analysiss<------------"
+	            echo "------------>Angular Static Code Analysiss<------------"
 	        }
 	    }
 	    stage('Angular Build') {
 	        steps {
-	            echo "------------>SpringBoot Build<------------"
-	            sh 'npm install'
+	            echo "------------>Angular Build<------------"
 	            sh 'ng build'
 	        }
 	    }
