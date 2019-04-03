@@ -41,6 +41,13 @@ public class VigilanteTest extends AbstractTransactionalJUnit4SpringContextTests
 	}
 
 	@Test
+	public void consultarNuevoServicioVehiculoITest() {
+		Vehiculo vehiculo = vehiculoTestDataBuilder.build();
+		ServicioParqueo servicioParqueo = vigilante.consultarServicio(vehiculo.getPlaca());
+		Assert.assertEquals(vehiculo.getPlaca(), servicioParqueo.getVehiculo().getPlaca());
+	}
+
+	@Test
 	public void registrarIngresoVehiculoITest() {
 		Vehiculo vehiculo = vehiculoTestDataBuilder.build();
 		ServicioParqueo servicioParqueo = vigilante.registrarIngresoVehiculo(vehiculo);
