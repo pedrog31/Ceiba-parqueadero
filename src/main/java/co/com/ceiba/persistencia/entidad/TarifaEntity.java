@@ -32,61 +32,27 @@ public class TarifaEntity {
 		super();
 	}
 
-	public TarifaEntity(String cilindraje, byte horaCaduca, byte horaInicio, String tipoVehiculo,
-			int valor) {
-		super();
-		this.cilindraje = cilindraje;
-		this.horaCaduca = horaCaduca;
-		this.horaInicio = horaInicio;
-		this.tipoVehiculo = tipoVehiculo;
-		this.valor = valor;
-	}
-
 	public Long getIdentificador() {
 		return identificador;
-	}
-
-	public void setIdentificador(Long identificador) {
-		this.identificador = identificador;
 	}
 
 	public String getCilindraje() {
 		return cilindraje;
 	}
 
-	public void setCilindraje(String cilindraje) {
-		this.cilindraje = cilindraje;
-	}
-
 	public byte getHoraCaduca() {
 		return horaCaduca;
-	}
-
-	public void setHoraCaduca(byte horaCaduca) {
-		this.horaCaduca = horaCaduca;
 	}
 
 	public byte getHoraInicio() {
 		return horaInicio;
 	}
 
-	public void setHoraInicio(byte horaInicio) {
-		this.horaInicio = horaInicio;
-	}
-
 	public String getTipoVehiculo() {
 		return tipoVehiculo;
 	}
 
-	public void setTipoVehiculo(String tipoVehiculo) {
-		this.tipoVehiculo = tipoVehiculo;
-	}
-
 	public int getValor() {
 		return valor;
-	}
-
-	public void setValor(int valor) {
-		this.valor = valor;
 	}
 }

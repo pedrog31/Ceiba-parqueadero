@@ -25,14 +25,5 @@ public final class TarifaBuilder {
 			tarifas.add(convertirADominio (tarifaEntity));
 		}
 		return tarifas;
-	} 
-	
-	public static TarifaEntity convertirAEntity(Tarifa tarifa) {
-		return new TarifaEntity (
-						tarifa.getCilindraje(),
-						tarifa.getHoraCaduca(),
-						tarifa.getHoraInicio(),
-						tarifa.getTipoVehiculo(),
-						tarifa.getValor());
 	}
 }

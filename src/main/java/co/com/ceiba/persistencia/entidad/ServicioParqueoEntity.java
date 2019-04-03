@@ -59,47 +59,23 @@ public class ServicioParqueoEntity {
 		return identificador;
 	}
 
-	public void setIdentificador(Long identificador) {
-		this.identificador = identificador;
-	}
-
 	public Date getFechaIngreso() {
 		return fechaIngreso;
-	}
-
-	public void setFechaIngreso(Date fechaIngreso) {
-		this.fechaIngreso = fechaIngreso;
 	}
 
 	public Date getFechaSalida() {
 		return fechaSalida;
 	}
 
-	public void setFechaSalida(Date fechaSalida) {
-		this.fechaSalida = fechaSalida;
-	}
-
 	public Boolean getPagado() {
 		return pagado;
-	}
-
-	public void setPagado(Boolean pagado) {
-		this.pagado = pagado;
 	}
 
 	public long getValor() {
 		return valor;
 	}
 
-	public void setValor(long valor) {
-		this.valor = valor;
-	}
-
 	public VehiculoEntity getVehiculo() {
 		return vehiculo;
-	}
-
-	public void setVehiculo(VehiculoEntity vehiculo) {
-		this.vehiculo = vehiculo;
 	}
 }
