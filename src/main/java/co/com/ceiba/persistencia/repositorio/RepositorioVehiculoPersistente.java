@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import co.com.ceiba.dominio.Vehiculo;
 import co.com.ceiba.dominio.repositorio.RepositorioVehiculo;
 import co.com.ceiba.persistencia.builder.VehiculoBuilder;
+import co.com.ceiba.persistencia.entidad.VehiculoEntity;
 import co.com.ceiba.persistencia.repositorio.jpa.RepositorioVehiculoJPA;
 
 @Component()
@@ -16,7 +17,7 @@ public class RepositorioVehiculoPersistente implements RepositorioVehiculo {
 
 	@Override
 	public Vehiculo obtenerVehiculoPorPlaca(String placa) {
-		return VehiculoBuilder.convertirADominio(repositorioVehiculoJPA.findByPlaca(placa));
+		return VehiculoBuilder.convertirADominio(repositorioVehiculoJPA.findByPlaca(placa).orElse(new VehiculoEntity(placa)));
 	}
 
 }

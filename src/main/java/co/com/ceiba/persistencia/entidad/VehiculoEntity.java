@@ -21,6 +21,11 @@ public class VehiculoEntity {
 	public VehiculoEntity() {
 		super();
 	}
+	
+	public VehiculoEntity(String placa) {
+		super();
+		this.placa = placa;
+	}
 
 	public VehiculoEntity(String placa, Integer cilindraje, String tipoVehiculo) {
 		super();

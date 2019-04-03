@@ -2,6 +2,7 @@ package co.com.ceiba.persistencia.repositorio.jpa;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -15,9 +16,9 @@ import co.com.ceiba.persistencia.entidad.ServicioParqueoEntity;
 @Repository
 public interface RepositorioServicioParqueoJPA extends JpaRepository<ServicioParqueoEntity, Long> {
 
-	ServicioParqueoEntity findByVehiculoPlacaAndFechaSalida(String placa, Date fechaSalida);
+	Optional<ServicioParqueoEntity> findByVehiculoPlacaAndFechaSalida(String placa, Date fechaSalida);
 
-	ServicioParqueoEntity findByVehiculoPlacaAndPagadoNull(String placa);
+	Optional<ServicioParqueoEntity> findByVehiculoPlacaAndPagadoNull(String placa);
 
 	Integer countByVehiculoTipoVehiculoAndPagadoNull(String tipoVehiculo);
 	

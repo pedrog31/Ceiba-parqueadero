@@ -2,6 +2,7 @@ package co.com.ceiba.persistencia.builder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import co.com.ceiba.dominio.ServicioParqueo;
 import co.com.ceiba.persistencia.entidad.ServicioParqueoEntity;
@@ -11,13 +12,14 @@ public final class ServicioParqueoBuilder {
 	private ServicioParqueoBuilder() {
 	}
 
-	public static ServicioParqueo convertirADominio(ServicioParqueoEntity servicioParqueoEntity) {
+	public static ServicioParqueo convertirADominio(Optional<ServicioParqueoEntity> optionalServicioParqueoEntity) {
+		ServicioParqueoEntity servicioParqueoEntity = optionalServicioParqueoEntity.orElse(new ServicioParqueoEntity());
 		return new ServicioParqueo(
-						servicioParqueoEntity.getFechaIngreso(), 
-						servicioParqueoEntity.getFechaSalida(),
-						servicioParqueoEntity.getPagado(),
-						servicioParqueoEntity.getValor(),
-						VehiculoBuilder.convertirADominio(servicioParqueoEntity.getVehiculo()));
+				servicioParqueoEntity.getFechaIngreso(), 
+				servicioParqueoEntity.getFechaSalida(),
+				servicioParqueoEntity.getPagado(),
+				servicioParqueoEntity.getValor(),
+			    VehiculoBuilder.convertirADominio(servicioParqueoEntity.getVehiculo()));
 	}
 
 	public static ServicioParqueoEntity convertirAEntity(ServicioParqueo servicioParqueo) {
@@ -32,7 +34,7 @@ public final class ServicioParqueoBuilder {
 	public static List<ServicioParqueo> convertirADominio(List<ServicioParqueoEntity> serviciosParqueoEntity) {
 		List<ServicioParqueo> serviciosParqueo = new ArrayList<>();
 		for (ServicioParqueoEntity servicioParqueoEntity : serviciosParqueoEntity) {
-			serviciosParqueo.add(convertirADominio(servicioParqueoEntity));
+			serviciosParqueo.add(convertirADominio(Optional.of(servicioParqueoEntity)));
 		}
 		return serviciosParqueo;
 	}

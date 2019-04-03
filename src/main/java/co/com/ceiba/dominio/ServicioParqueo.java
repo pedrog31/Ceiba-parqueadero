@@ -89,7 +89,7 @@ public class ServicioParqueo {
 		return 0;
 	}
 
-	public boolean esVehiculoNuevo() {
+	public boolean esServicioNuevo() {
 		return this.getFechaIngreso() == null;
 	}
 

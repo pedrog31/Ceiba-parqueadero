@@ -40,10 +40,8 @@ public class Vigilante {
 	
 	public ServicioParqueo consultarServicio (String placa) {
 		ServicioParqueo servicioParqueo = respositorioServicioParqueo.buscarServicioVehiculo(placa);
-		if (servicioParqueo.esVehiculoNuevo()) {
+		if (servicioParqueo.esServicioNuevo()) {
 			Vehiculo vehiculo = repositorioVehiculo.obtenerVehiculoPorPlaca(placa);
-			if (vehiculo == null)
-				vehiculo = new Vehiculo(placa, null, null);
 			return new ServicioParqueo(null, vehiculo); 
 		} else if (servicioParqueo.esVehiculoIngresado()) {
 			return this.registrarSalidaVehiculo(servicioParqueo);

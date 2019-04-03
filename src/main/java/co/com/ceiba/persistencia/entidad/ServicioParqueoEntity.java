@@ -41,6 +41,7 @@ public class ServicioParqueoEntity {
 
 	public ServicioParqueoEntity() {
 		super();
+		this.vehiculo = new VehiculoEntity();
 	}
 
 	public ServicioParqueoEntity(Date fechaIngreso, Date fechaSalida, Boolean pagado, long valor,
