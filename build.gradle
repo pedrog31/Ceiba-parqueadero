@@ -29,5 +29,5 @@ dependencies {
 	implementation 'wsdl4j:wsdl4j:1.6.2'
 	implementation files ('libs/SuperfinancieraWebServiceTRMClientJava.jar')
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'	
 }

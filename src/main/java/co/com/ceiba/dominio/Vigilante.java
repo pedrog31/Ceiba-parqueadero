@@ -2,37 +2,28 @@ package co.com.ceiba.dominio;
 
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import co.com.ceiba.dominio.excepcion.VigilanteExcepcion;
-import co.com.ceiba.dominio.repositorio.RepositorioRestriccion;
 import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
 import co.com.ceiba.dominio.repositorio.RepositorioTarifas;
 import co.com.ceiba.dominio.repositorio.RepositorioTasaRepresentativaMercado;
 import co.com.ceiba.dominio.repositorio.RepositorioVehiculo;
 
 public class Vigilante {
-
-	public static final String VEHICULO_NO_AUTORIZADO = "Vehiculo no habilitado para el ingreso.";
-	public static final String PARQUEADERO_LLENO = "No se encuentran espacios disponibles para parquear.";
 	
+	private List<RestriccionIngreso> restriccionesIngreso;
 	private RepositorioServicioParqueo respositorioServicioParqueo;
-	private RepositorioRestriccion repositorioRestricciones;
 	private RepositorioTarifas repositorioTarifas;
 	private RepositorioVehiculo repositorioVehiculo;
 	private RepositorioTasaRepresentativaMercado repositorioTasaRepresentativaMercado;
-	
-	//private List<ValidacionesIngreso> validates:
 
 	public Vigilante(
-			RepositorioServicioParqueo respositorioServicioParqueo,
-			RepositorioRestriccion repositorioRestricciones, 
+			List<RestriccionIngreso> restriccionesIngreso,
+			RepositorioServicioParqueo respositorioServicioParqueo, 
 			RepositorioTarifas repositorioTarifas,
 			RepositorioVehiculo repositorioVehiculo,
 			RepositorioTasaRepresentativaMercado repositorioTasaRepresentativaMercado) {
+		this.restriccionesIngreso = restriccionesIngreso;
 		this.respositorioServicioParqueo = respositorioServicioParqueo;
-		this.repositorioRestricciones = repositorioRestricciones;
 		this.repositorioTarifas = repositorioTarifas;
 		this.repositorioVehiculo = repositorioVehiculo;
 		this.repositorioTasaRepresentativaMercado = repositorioTasaRepresentativaMercado;
@@ -58,22 +49,8 @@ public class Vigilante {
 	}
 
 	private void validarIngresoPorRestricciones(Vehiculo vehiculo) {
-		List<Restriccion> restricciones = this.repositorioRestricciones
-				.obtenerRestriccionesActivas(vehiculo.getTipo());
-		for (Restriccion restriccion: restricciones) {
-			if (restriccion.getExpresionRegular() != null) {
-				Pattern pat = Pattern.compile(restriccion.getExpresionRegular(), Pattern.CASE_INSENSITIVE);
-				Matcher match = pat.matcher(vehiculo.getPlaca());
-				if (match.find()) {
-					throw new VigilanteExcepcion(VEHICULO_NO_AUTORIZADO);
-				}
-			} else if (restriccion.getCapacidad() != null) {
-				Integer numeroVehiculos = respositorioServicioParqueo.obtenerNumeroVehiculosParqueados(vehiculo.getTipo());
-				if (restriccion.getCapacidad() <= numeroVehiculos) {
-					throw new VigilanteExcepcion(PARQUEADERO_LLENO);
-				}
-			}
-		}
+		for (RestriccionIngreso restriccion: restriccionesIngreso)
+			restriccion.esValido(vehiculo);
 	}
  
 	private ServicioParqueo registrarSalidaVehiculo(ServicioParqueo servicioParqueo) {
