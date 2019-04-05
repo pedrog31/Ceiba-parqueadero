@@ -48,35 +48,6 @@ pipeline {
 	            sh 'gradle --b ./build.gradle build -x test'
 	        }
 	    }
-	    stage('Angular Checkout'){
-	        steps{
-	            echo "------------>Angular Checkout<------------"
-	            checkout([$class: 'GitSCM', branches: [[name: '*/develop']],
-	            doGenerateSubmoduleConfigurations: false, extensions: [], gitTool:
-	            'Git_Centos', submoduleCfg: [], userRemoteConfigs: [[credentialsId:
-	            'GitHub_pedrog31', url:
-	            'https://github.com/pedrog31/Front-ceiba-parqueadero']]])
-	            sh 'npm install'
-	        }
-	    }
-	    stage('Angular Functional Tests') {
-	        steps {
-	            echo "------------>Angular Functional Tests<------------"
-	            sh 'npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --no-sandbox'
-	            sh 'npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js'
-	        }
-	    }
-	    stage('Angular Static Code Analysis') {
-	        steps{
-	            echo "------------>Angular Static Code Analysiss<------------"
-	        }
-	    }
-	    stage('Angular Build') {
-	        steps {
-	            echo "------------>Angular Build<------------"
-	            sh 'ng build'
-	        }
-	    }
 	 }
 	 post {
 	    always {
