@@ -4,12 +4,12 @@ import java.util.Calendar;
 
 import co.com.ceiba.dominio.excepcion.VigilanteExcepcion;
 
-public class RestriccionPlacaA implements RestriccionIngreso {
+public class RestriccionIngresoPlacaA implements RestriccionIngreso {
 
 	public static final String VEHICULO_NO_AUTORIZADO = "Vehiculo no habilitado para el ingreso.";
 	private Calendar calendario;
 	
-	public RestriccionPlacaA (Calendar calendario) {
+	public RestriccionIngresoPlacaA (Calendar calendario) {
 		this.calendario = calendario;
 	}
 	

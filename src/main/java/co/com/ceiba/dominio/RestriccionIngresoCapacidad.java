@@ -3,14 +3,14 @@ package co.com.ceiba.dominio;
 import co.com.ceiba.dominio.excepcion.VigilanteExcepcion;
 import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
 
-public class RestriccionCapacidad implements RestriccionIngreso {
+public class RestriccionIngresoCapacidad implements RestriccionIngreso {
 	
 	public static final String PARQUEADERO_LLENO = "No se encuentran espacios disponibles para parquear.";
 
 	private RepositorioServicioParqueo repositorioServicioParqueo;
 	private String tipoVehiculo;
 	private Integer capacidad;
-	public RestriccionCapacidad(RepositorioServicioParqueo repositorioServicioParqueo, String tipoVehiculo,
+	public RestriccionIngresoCapacidad(RepositorioServicioParqueo repositorioServicioParqueo, String tipoVehiculo,
 			Integer capacidad) {
 		this.repositorioServicioParqueo = repositorioServicioParqueo;
 		this.tipoVehiculo = tipoVehiculo;

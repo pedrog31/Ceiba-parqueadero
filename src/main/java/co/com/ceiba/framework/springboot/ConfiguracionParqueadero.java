@@ -7,9 +7,9 @@ import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import co.com.ceiba.dominio.RestriccionCapacidad;
+import co.com.ceiba.dominio.RestriccionIngresoCapacidad;
 import co.com.ceiba.dominio.RestriccionIngreso;
-import co.com.ceiba.dominio.RestriccionPlacaA;
+import co.com.ceiba.dominio.RestriccionIngresoPlacaA;
 import co.com.ceiba.dominio.Vigilante;
 import co.com.ceiba.dominio.repositorio.RepositorioServicioParqueo;
 import co.com.ceiba.dominio.repositorio.RepositorioTarifas;
@@ -37,9 +37,9 @@ public class ConfiguracionParqueadero {
 	@Bean
     public List<RestriccionIngreso> crearRestricciones(RepositorioServicioParqueo respositorioServicioParqueo) {
         return Arrays.asList(
-        		new RestriccionPlacaA(Calendar.getInstance()),
-        		new RestriccionCapacidad(respositorioServicioParqueo, "Carro", 20),
-        		new RestriccionCapacidad(respositorioServicioParqueo, "Moto", 10));
+        		new RestriccionIngresoPlacaA(Calendar.getInstance()),
+        		new RestriccionIngresoCapacidad(respositorioServicioParqueo, "Carro", 20),
+        		new RestriccionIngresoCapacidad(respositorioServicioParqueo, "Moto", 10));
     }
 
 }

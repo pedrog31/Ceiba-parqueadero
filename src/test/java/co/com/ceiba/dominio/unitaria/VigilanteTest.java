@@ -13,9 +13,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import co.com.ceiba.dominio.RestriccionCapacidad;
+import co.com.ceiba.dominio.RestriccionIngresoCapacidad;
 import co.com.ceiba.dominio.RestriccionIngreso;
-import co.com.ceiba.dominio.RestriccionPlacaA;
+import co.com.ceiba.dominio.RestriccionIngresoPlacaA;
 import co.com.ceiba.dominio.Vehiculo;
 import co.com.ceiba.dominio.Vigilante;
 import co.com.ceiba.dominio.excepcion.VigilanteExcepcion;
@@ -52,9 +52,9 @@ public class VigilanteTest {
 
 	private void crearRestricciones(Calendar  calendario) {
 		restriccionesIngreso = Arrays.asList(
-        		new RestriccionPlacaA(calendario),
-        		new RestriccionCapacidad(respositorioServicioParqueo, "Carro", 20),
-        		new RestriccionCapacidad(respositorioServicioParqueo, "Moto", 10));
+        		new RestriccionIngresoPlacaA(calendario),
+        		new RestriccionIngresoCapacidad(respositorioServicioParqueo, "Carro", 20),
+        		new RestriccionIngresoCapacidad(respositorioServicioParqueo, "Moto", 10));
 	}
 
 	private void crearVigilante() {
@@ -93,7 +93,7 @@ public class VigilanteTest {
 				}
 			} catch (VigilanteExcepcion ve) {
 				if (dia == Calendar.MONDAY || dia == Calendar.SUNDAY) {
-					assertEquals(RestriccionPlacaA.VEHICULO_NO_AUTORIZADO, ve.getMessage());
+					assertEquals(RestriccionIngresoPlacaA.VEHICULO_NO_AUTORIZADO, ve.getMessage());
 				} else {
 					fail();
 				}
@@ -109,7 +109,7 @@ public class VigilanteTest {
 			vigilante.registrarIngresoVehiculo(vehiculo);
 			fail();
 		} catch (VigilanteExcepcion ve) {
-			assertEquals(RestriccionCapacidad.PARQUEADERO_LLENO, ve.getMessage());
+			assertEquals(RestriccionIngresoCapacidad.PARQUEADERO_LLENO, ve.getMessage());
 		}
 	}
 
@@ -132,7 +132,7 @@ public class VigilanteTest {
 			vigilante.registrarIngresoVehiculo(vehiculo);
 			fail();
 		} catch (VigilanteExcepcion ve) {
-			assertEquals(RestriccionCapacidad.PARQUEADERO_LLENO, ve.getMessage());
+			assertEquals(RestriccionIngresoCapacidad.PARQUEADERO_LLENO, ve.getMessage());
 		}
 	}
 
@@ -155,7 +155,7 @@ public class VigilanteTest {
 			vigilante.registrarIngresoVehiculo(vehiculo);
 			fail();
 		} catch (VigilanteExcepcion ve) {
-			assertEquals(RestriccionCapacidad.PARQUEADERO_LLENO, ve.getMessage());
+			assertEquals(RestriccionIngresoCapacidad.PARQUEADERO_LLENO, ve.getMessage());
 		}
 	}
 

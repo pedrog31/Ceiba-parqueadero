@@ -1,8 +1,8 @@
 package co.com.ceiba.dominio;
 
 public class Vehiculo {
-	private String placa;
 	private Integer cilindraje;
+	private String placa;
 	private String tipo;
 	
 	public Vehiculo() {
