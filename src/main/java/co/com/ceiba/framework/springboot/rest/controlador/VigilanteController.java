@@ -61,4 +61,9 @@ public class VigilanteController {
 		List<ServicioParqueo> serviciosParqueo = vigilante.obtenerVehiculosParqueados();
 		return new ResponseEntity<> (serviciosParqueo, HttpStatus.OK);
 	}
+	
+	@ExceptionHandler(VigilanteExcepcion.class)
+	public ResponseEntity<String> manejarError(VigilanteExcepcion ve) {
+		return new ResponseEntity<> (ve.getMessage(), HttpStatus.FORBIDDEN);
+	} 
 }
